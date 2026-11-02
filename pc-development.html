@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <style>html { background-color: #0b1d16; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1d16">
+    <title>التطوير عبر الحاسوب | مشروع شعيب</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="3e3cb453-86c1-4ba3-b889-4e419bc9d649"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --page-bg:#151a16; --page-card:rgba(255,255,255,.075); --page-border:rgba(166,170,132,.25); --page-text:#fff; --page-muted:rgba(255,255,255,.8); --page-accent:#dfc77f; }
+        :root[data-theme="light"] { --page-bg:#f3f4ee; --page-card:#fff; --page-border:rgba(21,34,26,.18); --page-text:#151a16; --page-muted:#4a594d; --page-accent:#286344; }
+        * { box-sizing:border-box; }
+        body { min-height:100vh; margin:0; background:radial-gradient(ellipse at 80% 0,rgba(89,132,89,.2),transparent 40rem),var(--page-bg); color:var(--page-text); font:1rem/1.7 "Segoe UI",Tahoma,sans-serif; }
+        a { color:inherit; }
+        .site-nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem clamp(1rem,4vw,3rem); border-bottom:1px solid var(--page-border); background:rgba(18,29,22,.92); color:#fff; }
+        :root[data-theme="light"] .site-nav { background:rgba(243,245,255,.96); color:var(--page-text); }
+        .site-brand { font-weight:800; text-decoration:none; white-space:nowrap; }
+        .site-nav-links { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
+        .site-nav-links a,.menu-toggle { padding:.55rem .85rem; border:1px solid var(--page-border); border-radius:999px; background:var(--page-card); color:inherit; text-decoration:none; }
+        .site-menu { position:relative; }
+        .site-menu summary { list-style:none; cursor:pointer; }
+        .site-menu summary::-webkit-details-marker { display:none; }
+        .menu-toggle { font:inherit; }
+        .site-menu-links { position:fixed; z-index:30; inset-block:0; inset-inline-end:0; display:grid; align-content:start; width:min(22rem,88vw); height:100dvh; gap:.4rem; padding:4.5rem 1rem 1rem; border:1px solid var(--page-border); border-radius:0 0 0 18px; background:var(--page-bg); box-shadow:-18px 0 48px rgba(0,0,0,.4); }
+        .site-menu-links a { padding:.65rem .8rem; border-radius:10px; text-decoration:none; }
+        .site-menu-links a:hover,.site-menu-links a:focus-visible { background:var(--page-card); }
+        main { width:min(100% - 2rem,1000px); margin:auto; padding:clamp(2rem,6vw,4rem) 0; }
+        .panel { margin-bottom:1.2rem; padding:clamp(1.15rem,4vw,2rem); border:1px solid var(--page-border); border-radius:22px; background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow:0 20px 55px rgba(18,29,22,.23); backdrop-filter:blur(16px); }
+        h1 { margin:.2rem 0 .6rem; font-size:clamp(2rem,6vw,3rem); line-height:1.2; }
+        h2 { margin:.2rem 0 1rem; }
+        p { color:var(--page-muted); }
+        .model-grid,.environment-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:.8rem; }
+        .mini-card { padding:1rem; border:1px solid var(--page-border); border-radius:16px; background:var(--page-card); }
+        .mini-card h3 { margin:.1rem 0 .4rem; }
+        .field { display:grid; gap:.45rem; max-width:32rem; margin:.8rem 0; }
+        select { width:100%; min-height:2.8rem; padding:.6rem .8rem; border:1px solid var(--page-border); border-radius:10px; background:var(--page-bg); color:var(--page-text); font:inherit; }
+        .tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+        .tabs button,.action-button { min-height:2.7rem; padding:.55rem .9rem; border:1px solid var(--page-border); border-radius:999px; background:var(--page-card); color:var(--page-text); font:inherit; font-weight:700; cursor:pointer; }
+        .tabs img { width:1.35rem; height:1.35rem; vertical-align:middle; }
+        .tabs button[aria-selected="true"],.action-button.primary { background:var(--page-accent); color:#151a16; }
+        :root[data-theme="light"] .tabs button[aria-selected="true"],:root[data-theme="light"] .action-button.primary { color:#fff; }
+        pre { overflow:auto; padding:1rem; border:1px solid var(--page-border); border-radius:12px; background:#111713; color:#e4eaff; direction:ltr; text-align:left; white-space:pre-wrap; }
+        .developer-library { margin-block:1.2rem; padding:clamp(1.15rem,4vw,2rem); border:1px solid var(--page-border); border-radius:22px; background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow:0 20px 55px rgba(18,29,22,.23); }
+        .developer-library > p { color:var(--page-muted); }
+        .code-window { overflow:hidden; border:1px solid rgba(157,176,255,.28); border-radius:14px; background:#111713; box-shadow:0 16px 38px rgba(0,0,0,.3); direction:ltr; text-align:left; }
+        .code-toolbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; padding:.65rem .9rem; border-bottom:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); color:#d7defa; }
+        .code-toolbar-dots,.code-toolbar-actions,.interactive-actions { display:inline-flex; align-items:center; flex-wrap:wrap; gap:.45rem; }
+        .code-toolbar-dots span { width:.6rem; height:.6rem; border-radius:50%; background:#ff6b6b; }
+        .code-toolbar-dots span:nth-child(2) { background:#ffd166; }
+        .code-toolbar-dots span:nth-child(3) { background:#4cd97b; }
+        .code-copy-btn,.favorite-button,.voice-button { padding:.4rem .7rem; border:1px solid rgba(173,190,255,.3); border-radius:8px; background:rgba(110,137,255,.16); color:#eef1ff; cursor:pointer; font:inherit; font-weight:700; }
+        .code-window pre { max-height:34rem; margin:0; overflow:auto; padding:1.1rem; border:0; border-radius:0; font:.84rem/1.7 Consolas,"Courier New",monospace; tab-size:2; }
+        .code-window code { white-space:pre; }
+        .code-comment { color:#8290a8; }
+        .code-keyword { color:#c792ea; }
+        .code-string { color:#c3e88d; }
+        .code-function { color:#82aaff; }
+        .code-number { color:#f78c6c; }
+        .library-notice { padding:.8rem 1rem; border-inline-start:4px solid #e6b23c; border-radius:.5rem; background:rgba(230,178,60,.12); }
+        .code-example { margin-top:1.25rem; }
+        .code-example ol { color:var(--page-muted); line-height:1.7; }
+        .run-guide { margin-top:1rem; }
+        .action-row { display:flex; flex-wrap:wrap; gap:.6rem; }
+        .terminal { min-height:3rem; padding:.8rem 1rem; border-radius:10px; background:#111713; color:#a9ffc4; direction:ltr; text-align:left; white-space:pre-wrap; }
+        .site-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.7rem; padding:1.25rem; background:#151a16; color:#fff; text-align:center; }
+        .site-footer a { padding:.4rem .7rem; border:1px solid rgba(255,255,255,.3); border-radius:999px; text-decoration:none; }
+        @media(max-width:620px) { .site-nav { align-items:flex-start; flex-wrap:wrap; } .site-nav-links { width:100%; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav site-header-nav" aria-label="التنقل الرئيسي">
+        <a class="site-brand brand logo-container" href="index.html" aria-label="TIK CODE DZ — الصفحة الرئيسية"><img src="assets/tik-code-dz-logo.png" alt="TIK CODE DZ" class="brand-logo-image"></a>
+        <div class="national-flags" role="group" aria-label="الأعلام الوطنية">
+            <img src="assets/algeria-flag.png" alt="علم الجزائر">
+            <img src="assets/palestine-flag.png" alt="علم فلسطين">
+        </div>
+        <div class="language-switcher-container" id="language-switcher-container" role="group" aria-label="اختيار اللغة"></div>
+        <details class="site-menu"><summary class="menu-toggle" aria-label="فتح القائمة الجانبية">☰</summary><div class="site-menu-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+            <a href="ideas.html">الأفكار والمقترحات</a><a href="privacy.html">الخصوصية وإخلاء المسؤولية</a>
+            <a href="pc-development.html" aria-current="page">التطوير عبر الحاسوب</a><a href="mobile-development.html">التطوير عبر الهاتف</a>
+            <button type="button" data-site-theme-toggle>التبديل إلى الوضع الفاتح</button>
+        </div></details>
+        <div class="site-nav-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+        </div>
+    </nav>
+    <main>
+        <header class="panel">
+            <p>PC AI Developer Hub</p>
+            <h1>بيئات تطوير الحاسوب ولغات البرمجة المتقدمة</h1>
+            <p>مساحة مستقلة لإرشادات البرمجة على الحاسوب. استخدم المساعدات لفهم الكود ومراجعة الأخطاء، ثم اختبر الحل في بيئة آمنة.</p>
+            <label class="field" for="pc-os">نظام التشغيل
+                <select id="pc-os"><option value="Windows 11">Windows 11</option><option value="Windows 10">Windows 10</option><option value="Mac">Mac</option></select>
+            </label>
+            <p id="pc-os-advice" role="status" aria-live="polite"></p>
+        </header>
+        <section class="panel" aria-labelledby="model-title">
+            <h2 id="model-title">مساعدون مناسبون للتطوير</h2>
+            <div class="model-grid">
+                <article class="mini-card"><h3>ChatGPT</h3><p>شرح الأخطاء، إنشاء اختبارات، وتقسيم مهام المشروع إلى خطوات واضحة.</p><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">فتح ChatGPT</a></article>
+                <article class="mini-card"><h3>Google Gemini</h3><p>استكشاف أمثلة الويب وخدمات Google ومراجعة خطط التطوير.</p><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">فتح Gemini</a></article>
+                <article class="mini-card"><h3>Claude</h3><p>مراجعة التغييرات والملفات وشرح الحلول مع الحفاظ على السياق.</p><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">فتح Claude</a></article>
+            </div>
+        </section>
+        <section class="panel" aria-labelledby="environment-title">
+            <h2 id="environment-title">بيئة الحاسوب</h2>
+            <div class="environment-grid">
+                <article class="mini-card"><h3>VS Code</h3><p>محرر متعدد اللغات؛ افتح مجلد المشروع وثبّت الإضافات الموثوقة المناسبة.</p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">موقع VS Code</a></article>
+                <article class="mini-card"><h3>Python virtual environment</h3><p>بيئة معزولة لتثبيت اعتماديات المشروع دون التأثير على بقية النظام.</p><pre id="setup-command">py -m venv .venv
+.venv\Scripts\activate
+py --version</pre><button class="action-button" type="button" data-copy="setup-command">نسخ الأوامر</button></article>
+            </div>
+        </section>
+        <section class="panel" aria-labelledby="language-title">
+            <h2 id="language-title">مختبر لغات البرمجة</h2>
+            <p>اختر لغة لعرض مثال موجز ومحاكاة ناتج التنفيذ.</p>
+            <div class="tabs" role="tablist" aria-label="اختر لغة البرمجة">
+                <button type="button" role="tab" data-lang="python" aria-selected="true" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" loading="lazy"> Python</button>
+                <button type="button" role="tab" data-lang="cpp" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="" loading="lazy"> C++</button>
+                <button type="button" role="tab" data-lang="csharp" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="" loading="lazy"> C#</button>
+                <button type="button" role="tab" data-lang="javascript" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="" loading="lazy"> JavaScript</button>
+            </div>
+            <article class="mini-card" role="tabpanel" aria-live="polite">
+                <h3 id="language-name">Python</h3><p id="language-description">لغة عالية المستوى مناسبة للأتمتة وتحليل البيانات والتعلم.</p>
+                <pre><code id="language-code">name = "Shuaib"
+print(f"Hello, {name}!")</code></pre>
+                <div class="action-row"><button class="action-button" type="button" data-copy="language-code">نسخ الكود</button><button class="action-button primary" type="button" id="run-code">تشغيل المحاكاة</button></div>
+                <h3>Terminal</h3><output class="terminal" id="terminal-output" aria-live="polite">اختر «تشغيل المحاكاة» لعرض ناتج المثال.</output>
+            </article>
+            <aside class="mini-card run-guide" aria-live="polite">
+                <h3>أين أضع الكود؟</h3>
+                <p id="language-run-guide">افتح VS Code، أنشئ ملفًا باسم main.py، الصق كود Python ثم شغّله من الطرفية بالأمر: python main.py.</p>
+            </aside>
+        </section>
+        <section class="panel" aria-labelledby="code-location-title">
+            <h2 id="code-location-title">أين يوضع الكود على الحاسوب؟</h2>
+            <p>افتح VS Code، أنشئ ملفًا جديدًا بالامتداد المطابق للغة المختارة مثل <code>.py</code> أو <code>.cpp</code> أو <code>.cs</code> أو <code>.js</code>، الصق الكود، ثم شغّله بالطريقة المناسبة للغة. أما كود Google Apps Script فيوضع في محرر Apps Script المرتبط بجدول Google Sheets.</p>
+        </section>
+        <section class="developer-library" aria-labelledby="developer-library-title">
+            <h2 id="developer-library-title">مكتبة الأكواد والحلول البرمجية (Developer &amp; Apps Script Library)</h2>
+            <p>مثال تعليمي يقرأ نطاقًا محدودًا من الورقة، ويرسل محتواه إلى OpenAI API، ثم يكتب الملخص في العمود F. لا تشغّله على بيانات حساسة.</p>
+            <div class="code-window">
+                <div class="code-toolbar">
+                    <span class="code-toolbar-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    <span>Google Apps Script · JavaScript</span>
+                    <span class="code-toolbar-actions">
+                        <button class="code-copy-btn" id="copy-apps-script" type="button">نسخ الكود</button>
+                        <button class="voice-button" type="button" data-speak-target="apps-script-code">استماع 🔊</button>
+                        <button class="favorite-button" type="button" id="favorite-apps-script" data-favorite-type="code" aria-pressed="false">حفظ الكود</button>
+                    </span>
+                </div>
+                <pre><code id="apps-script-code" aria-label="Google Apps Script example"><span class="code-comment">// Store OPENAI_API_KEY in Apps Script Project Settings &gt; Script Properties.</span>
+<span class="code-comment">// Never paste the API key into the sheet or share it with untrusted editors.</span>
+<span class="code-keyword">function</span> <span class="code-function">summarizeSheetRange</span>() {
+  <span class="code-keyword">const</span> apiKey = PropertiesService.getScriptProperties()
+    .getProperty(<span class="code-string">'OPENAI_API_KEY'</span>);
+  <span class="code-keyword">if</span> (!apiKey) {
+    <span class="code-keyword">throw new</span> Error(<span class="code-string">'Add OPENAI_API_KEY to Script Properties first.'</span>);
+  }
+
+  <span class="code-keyword">const</span> sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  <span class="code-keyword">const</span> rows = sheet.getRange(<span class="code-string">'A1:D20'</span>).getDisplayValues()
+    .filter(row =&gt; row.some(cell =&gt; cell.trim() !== <span class="code-string">''</span>));
+  <span class="code-keyword">if</span> (rows.length === <span class="code-number">0</span>) {
+    <span class="code-keyword">throw new</span> Error(<span class="code-string">'The selected range is empty.'</span>);
+  }
+
+  <span class="code-keyword">const</span> response = UrlFetchApp.fetch(
+    <span class="code-string">'https://api.openai.com/v1/chat/completions'</span>,
+    {
+      method: <span class="code-string">'post'</span>,
+      contentType: <span class="code-string">'application/json'</span>,
+      headers: { Authorization: <span class="code-string">'Bearer '</span> + apiKey },
+      payload: JSON.stringify({
+        model: <span class="code-string">'gpt-4o-mini'</span>,
+        messages: [{
+          role: <span class="code-string">'user'</span>,
+          content: <span class="code-string">'Summarize these spreadsheet rows in Arabic. Do not invent data:\n'</span>
+            + JSON.stringify(rows)
+        }],
+        temperature: <span class="code-number">0.2</span>
+      }),
+      muteHttpExceptions: <span class="code-keyword">true</span>
+    }
+  );
+
+  <span class="code-keyword">const</span> status = response.getResponseCode();
+  <span class="code-keyword">if</span> (status &lt; <span class="code-number">200</span> || status &gt;= <span class="code-number">300</span>) {
+    <span class="code-keyword">throw new</span> Error(<span class="code-string">'OpenAI API request failed: '</span> + status);
+  }
+
+  <span class="code-keyword">const</span> result = JSON.parse(response.getContentText());
+  <span class="code-keyword">const</span> summary = result.choices[<span class="code-number">0</span>].message.content;
+  sheet.getRange(<span class="code-string">'F1'</span>).setValue(<span class="code-string">'AI summary'</span>);
+  sheet.getRange(<span class="code-string">'F2'</span>).setValue(summary);
+}</code></pre>
+            </div>
+            <p class="library-notice">قبل التشغيل: أضف المفتاح في خصائص المشروع، وامنح Apps Script الأذونات المطلوبة. عند تشغيل المثال تُرسل خلايا A1:D20 إلى OpenAI؛ راجع سياسة مزوّد الخدمة وتكاليف API ولا تستخدم بيانات شخصية أو سرية.</p>
+
+            <article class="code-example">
+                <h3>مثال JavaScript: تنظيف قائمة قيم قبل استخدامها</h3>
+                <p id="js-clean-explanation">تأخذ الدالة نصًا متعدد الأسطر، وتزيل الفراغات وتستبعد الأسطر الفارغة، ثم تعيد قائمة نظيفة. المتغير rawText هو النص المدخل وcleanRows هي النتيجة.</p>
+                <button class="voice-button" type="button" data-speak-target="js-clean-explanation">استماع 🔊 للشرح</button>
+                <div class="code-window">
+                    <div class="code-toolbar">
+                        <span>JavaScript · تشغيل في Console المتصفح أو مشروعك</span>
+                        <span class="interactive-actions">
+                            <button class="code-copy-btn" type="button" data-copy-code="js-clean-code">نسخ الكود</button>
+                            <button class="voice-button" type="button" data-speak-target="js-clean-code">استماع 🔊</button>
+                        </span>
+                    </div>
+                    <pre><code id="js-clean-code"><span class="code-keyword">function</span> <span class="code-function">cleanRows</span>(rawText) {
+  <span class="code-keyword">return</span> rawText
+    .split(<span class="code-string">'\n'</span>)
+    .map((row) =&gt; row.trim().replace(/\s+/g, <span class="code-string">' '</span>))
+    .filter(Boolean);
+}
+
+<span class="code-keyword">const</span> rawText = <span class="code-string">'  Alice  \n\n  Bob   Smith  '</span>;
+console.log(<span class="code-function">cleanRows</span>(rawText));</code></pre>
+                </div>
+                <ol>
+                    <li><code>split('\n')</code> يقسم النص إلى أسطر.</li>
+                    <li><code>map</code> يزيل الفراغات حول كل سطر ويختصر الفراغات الداخلية.</li>
+                    <li><code>filter(Boolean)</code> يحذف الأسطر الفارغة، ثم تعرض <code>console.log</code> النتيجة.</li>
+                </ol>
+            </article>
+
+            <article class="code-example">
+                <h3>مثال Python: حساب مجموع عمود رقمي</h3>
+                <p id="python-sum-explanation">تستقبل الدالة قائمة قيم، وتتجاهل القيم التي لا يمكن تحويلها إلى رقم. المتغير values هو المدخل وtotal هو المجموع.</p>
+                <button class="voice-button" type="button" data-speak-target="python-sum-explanation">استماع 🔊 للشرح</button>
+                <div class="code-window">
+                    <div class="code-toolbar">
+                        <span>Python · Python 3</span>
+                        <span class="interactive-actions">
+                            <button class="code-copy-btn" type="button" data-copy-code="python-sum-code">نسخ الكود</button>
+                            <button class="voice-button" type="button" data-speak-target="python-sum-code">استماع 🔊</button>
+                        </span>
+                    </div>
+                    <pre><code id="python-sum-code"><span class="code-keyword">def</span> <span class="code-function">sum_numeric_values</span>(values):
+    total = 0.0
+    <span class="code-keyword">for</span> value <span class="code-keyword">in</span> values:
+        <span class="code-keyword">try</span>:
+            total += float(value)
+        <span class="code-keyword">except</span> (TypeError, ValueError):
+            <span class="code-keyword">continue</span>
+    <span class="code-keyword">return</span> total
+
+sales = [<span class="code-number">120</span>, <span class="code-string">"85.5"</span>, <span class="code-string">"غير متاح"</span>]
+print(<span class="code-function">sum_numeric_values</span>(sales))</code></pre>
+                </div>
+                <ol>
+                    <li>تبدأ الدالة مجموعًا بقيمة صفر.</li>
+                    <li>تحاول تحويل كل عنصر إلى رقم عشري؛ وتتخطى النصوص غير الرقمية بأمان.</li>
+                    <li>تعيد المجموع، وتعرضه <code>print</code>. غيّر قائمة <code>sales</code> إلى بيانات تجريبية خاصة بك.</li>
+                </ol>
+            </article>
+        </section>
+    </main>
+    <footer class="site-footer"><span>مشروع شعيب © 2026</span><a href="ideas.html">المقترحات</a><a href="privacy.html">الخصوصية</a><a href="pc-development.html">دليل الحاسوب</a><a href="mobile-development.html">دليل الهاتف</a></footer>
+    <script>
+        async function copyLibraryCode(text) {
+            if (navigator.clipboard) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                } catch (error) {
+                    console.warn('Clipboard API unavailable; using the fallback.', error);
+                }
+            }
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.append(textArea);
+            textArea.select();
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+            } finally {
+                textArea.remove();
+            }
+            if (!copied) throw new Error('Clipboard copy was not available');
+        }
+        document.querySelectorAll('.developer-library [data-copy-code], .developer-library #copy-apps-script').forEach((button) => {
+            button.addEventListener('click', async () => {
+                const codeId = button.dataset.copyCode || 'apps-script-code';
+                try {
+                    await copyLibraryCode(document.getElementById(codeId).textContent);
+                    button.textContent = 'تم النسخ';
+                } catch (error) {
+                    console.error('Unable to copy the code sample.', error);
+                    button.textContent = 'تعذّر النسخ';
+                }
+                window.setTimeout(() => { button.textContent = 'نسخ الكود'; }, 1400);
+            });
+        });
+        const appsScriptFavorite = document.querySelector('#favorite-apps-script');
+        try {
+            const savedFavorites = JSON.parse(localStorage.getItem('shuaib-favorites-v1') || '[]');
+            const saved = savedFavorites.some((item) => item.type === 'code'
+                && item.text === document.querySelector('#apps-script-code').textContent);
+            appsScriptFavorite.setAttribute('aria-pressed', String(saved));
+            appsScriptFavorite.textContent = saved ? 'الكود محفوظ' : 'حفظ الكود';
+        } catch (error) {
+            console.error('Could not read saved code.', error);
+        }
+        appsScriptFavorite.addEventListener('click', () => {
+            const key = 'shuaib-favorites-v1';
+            try {
+                const favorites = JSON.parse(localStorage.getItem(key) || '[]');
+                const text = document.querySelector('#apps-script-code').textContent;
+                const index = favorites.findIndex((item) => item.type === 'code' && item.text === text);
+                if (index >= 0) favorites.splice(index, 1);
+                else favorites.push({ type: 'code', text, savedAt: new Date().toISOString() });
+                localStorage.setItem(key, JSON.stringify(favorites.slice(-50)));
+                const saved = index < 0;
+                appsScriptFavorite.setAttribute('aria-pressed', String(saved));
+                appsScriptFavorite.textContent = saved ? 'الكود محفوظ' : 'حفظ الكود';
+            } catch (error) {
+                console.error('Could not update saved code.', error);
+                appsScriptFavorite.textContent = 'تعذّر الحفظ';
+            }
+        });
+        document.querySelectorAll('.developer-library [data-speak-target]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const text = document.getElementById(button.dataset.speakTarget)?.textContent;
+                if (!text || !('speechSynthesis' in window)) {
+                    button.textContent = 'الصوت غير متاح';
+                    return;
+                }
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+            });
+        });
+        const languageExamples = {
+            python: { title:'Python', description:'لغة عالية المستوى مناسبة للأتمتة وتحليل البيانات والتعلم.', code:'name = "Shuaib"\nprint(f"Hello, {name}!")', output:'Hello, Shuaib!', guide:'افتح VS Code، أنشئ ملفًا باسم main.py، الصق كود Python ثم شغّله من الطرفية بالأمر: python main.py.' },
+            cpp: { title:'C++', description:'لغة مترجمة عالية الأداء تُستخدم في الأنظمة والألعاب والتطبيقات التي تحتاج تحكمًا دقيقًا بالموارد.', code:'#include <iostream>\nint main() {\n  std::cout << "Hello, Shuaib!";\n  return 0;\n}', output:'Hello, Shuaib!', guide:'في VS Code أنشئ main.cpp، الصق الكود، ثم ابنِه باستخدام مترجم C++ مثل g++ وشغّل الملف التنفيذي الناتج.' },
+            csharp: { title:'C#', description:'لغة من منصة .NET لتطبيقات سطح المكتب والويب والألعاب.', code:'using System;\nConsole.WriteLine("Hello, Shuaib!");', output:'Hello, Shuaib!', guide:'في VS Code أنشئ مشروع .NET عبر dotnet new console، ثم ضع الكود في Program.cs وشغّله بالأمر dotnet run.' },
+            javascript: { title:'JavaScript', description:'لغة الويب التفاعلية، ويمكن استخدامها أيضًا على الخادم عبر بيئات مناسبة.', code:'const name = "Shuaib";\nconsole.log(`Hello, ${name}!`);', output:'Hello, Shuaib!', guide:'أنشئ ملفًا باسم main.js في VS Code، الصق الكود، ثم شغّله عبر Node.js باستخدام الأمر: node main.js.' }
+        };
+        let currentLanguage = 'python';
+        const osSelect = document.querySelector('#pc-os');
+        function updateOS() {
+            const mac = osSelect.value === 'Mac';
+            document.querySelector('#pc-os-advice').textContent = `أوامر البيئة متوافقة مبدئيًا مع ${osSelect.value}; راجع تثبيت Python وإعداد الطرفية على جهازك.`;
+            document.querySelector('#setup-command').textContent = mac
+                ? 'python3 -m venv .venv\nsource .venv/bin/activate\npython3 --version'
+                : 'py -m venv .venv\n.venv\\Scripts\\activate\npy --version';
+        }
+        osSelect.addEventListener('change', updateOS);
+        document.querySelectorAll('[data-lang]').forEach((tab) => tab.addEventListener('click', () => {
+            currentLanguage = tab.dataset.lang;
+            const item = languageExamples[currentLanguage];
+            document.querySelectorAll('[data-lang]').forEach((button) => button.setAttribute('aria-selected', String(button === tab)));
+            document.querySelector('#language-name').textContent = item.title;
+            document.querySelector('#language-description').textContent = item.description;
+            document.querySelector('#language-code').textContent = item.code;
+            document.querySelector('#language-run-guide').textContent = item.guide;
+            document.querySelector('#terminal-output').textContent = 'اختر «تشغيل المحاكاة» لعرض ناتج المثال.';
+        }));
+        document.querySelectorAll('[data-copy]').forEach((button) => button.addEventListener('click', async () => {
+            const text = document.getElementById(button.dataset.copy).textContent;
+            try { await navigator.clipboard.writeText(text); button.textContent = 'تم النسخ'; }
+            catch (error) { console.error('Clipboard access failed.', error); button.textContent = 'تعذّر النسخ'; }
+            setTimeout(() => { button.textContent = button.dataset.copy === 'setup-command' ? 'نسخ الأوامر' : 'نسخ الكود'; }, 1400);
+        }));
+        document.querySelector('#run-code').addEventListener('click', () => { document.querySelector('#terminal-output').textContent = languageExamples[currentLanguage].output; });
+        updateOS();
+    </script>
+    <script src="cmd-simulator.js"></script>
+    <script src="site-navigation.js"></script>
+    <script src="mobile-header-scroll.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <style>html { background-color: #0b1d16; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1d16">
+    <title>التطوير عبر الهاتف | مشروع شعيب</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="3e3cb453-86c1-4ba3-b889-4e419bc9d649"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --page-bg:#151a16; --page-card:rgba(255,255,255,.075); --page-border:rgba(166,170,132,.25); --page-text:#fff; --page-muted:rgba(255,255,255,.8); --page-accent:#dfc77f; }
+        :root[data-theme="light"] { --page-bg:#f3f4ee; --page-card:#fff; --page-border:rgba(21,34,26,.18); --page-text:#151a16; --page-muted:#4a594d; --page-accent:#286344; }
+        * { box-sizing:border-box; }
+        body { min-height:100vh; margin:0; background:radial-gradient(ellipse at 80% 0,rgba(89,132,89,.2),transparent 40rem),var(--page-bg); color:var(--page-text); font:1rem/1.7 "Segoe UI",Tahoma,sans-serif; }
+        a { color:inherit; }
+        .site-nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem clamp(1rem,4vw,3rem); border-bottom:1px solid var(--page-border); background:rgba(18,29,22,.92); color:#fff; }
+        :root[data-theme="light"] .site-nav { background:rgba(243,245,255,.96); color:var(--page-text); }
+        .site-brand { font-weight:800; text-decoration:none; white-space:nowrap; }
+        .site-nav-links { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
+        .site-nav-links a,.menu-toggle { padding:.55rem .85rem; border:1px solid var(--page-border); border-radius:999px; background:var(--page-card); color:inherit; text-decoration:none; }
+        .site-menu { position:relative; }
+        .site-menu summary { list-style:none; cursor:pointer; }
+        .site-menu summary::-webkit-details-marker { display:none; }
+        .menu-toggle { font:inherit; }
+        .site-menu-links { position:fixed; z-index:30; inset-block:0; inset-inline-end:0; display:grid; align-content:start; width:min(22rem,88vw); height:100dvh; gap:.4rem; padding:4.5rem 1rem 1rem; border:1px solid var(--page-border); border-radius:0 0 0 18px; background:var(--page-bg); box-shadow:-18px 0 48px rgba(0,0,0,.4); }
+        .site-menu-links a { padding:.65rem .8rem; border-radius:10px; text-decoration:none; }
+        .site-menu-links a:hover,.site-menu-links a:focus-visible { background:var(--page-card); }
+        main { width:min(100% - 2rem,1000px); margin:auto; padding:clamp(2rem,6vw,4rem) 0; }
+        .panel { margin-bottom:1.2rem; padding:clamp(1.15rem,4vw,2rem); border:1px solid var(--page-border); border-radius:22px; background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow:0 20px 55px rgba(18,29,22,.23); backdrop-filter:blur(16px); }
+        h1 { margin:.2rem 0 .6rem; font-size:clamp(2rem,6vw,3rem); line-height:1.2; }
+        h2 { margin:.2rem 0 1rem; }
+        p { color:var(--page-muted); }
+        .model-grid,.environment-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:.8rem; }
+        .mini-card { padding:1rem; border:1px solid var(--page-border); border-radius:16px; background:var(--page-card); }
+        .mini-card h3 { margin:.1rem 0 .4rem; }
+        .tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+        .tabs button,.action-button { min-height:2.7rem; padding:.55rem .9rem; border:1px solid var(--page-border); border-radius:999px; background:var(--page-card); color:var(--page-text); font:inherit; font-weight:700; cursor:pointer; }
+        .tabs img { width:1.35rem; height:1.35rem; vertical-align:middle; }
+        .tabs button[aria-selected="true"],.action-button.primary { background:var(--page-accent); color:#151a16; }
+        :root[data-theme="light"] .tabs button[aria-selected="true"],:root[data-theme="light"] .action-button.primary { color:#fff; }
+        .run-guide { margin-top:1rem; }
+        .action-row { display:flex; flex-wrap:wrap; gap:.6rem; }
+        .field { display:grid; gap:.45rem; max-width:36rem; margin:.8rem 0; }
+        select { width:100%; min-height:2.8rem; padding:.6rem .8rem; border:1px solid var(--page-border); border-radius:10px; background:var(--page-bg); color:var(--page-text); font:inherit; }
+        pre { overflow:auto; padding:1rem; border:1px solid var(--page-border); border-radius:12px; background:#111713; color:#e4eaff; direction:ltr; text-align:left; white-space:pre-wrap; }
+        .terminal { min-height:3rem; padding:.8rem 1rem; border-radius:10px; background:#111713; color:#a9ffc4; direction:ltr; text-align:left; white-space:pre-wrap; }
+        .environment-card[hidden] { display:none !important; }
+        .site-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.7rem; padding:1.25rem; background:#151a16; color:#fff; text-align:center; }
+        .site-footer a { padding:.4rem .7rem; border:1px solid rgba(255,255,255,.3); border-radius:999px; text-decoration:none; }
+        @media(max-width:620px) { .site-nav { align-items:flex-start; flex-wrap:wrap; } .site-nav-links { width:100%; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav site-header-nav" aria-label="التنقل الرئيسي">
+        <a class="site-brand brand logo-container" href="index.html" aria-label="TIK CODE DZ — الصفحة الرئيسية"><img src="assets/tik-code-dz-logo.png" alt="TIK CODE DZ" class="brand-logo-image"></a>
+        <div class="national-flags" role="group" aria-label="الأعلام الوطنية">
+            <img src="assets/algeria-flag.png" alt="علم الجزائر">
+            <img src="assets/palestine-flag.png" alt="علم فلسطين">
+        </div>
+        <div class="language-switcher-container" id="language-switcher-container" role="group" aria-label="اختيار اللغة"></div>
+        <details class="site-menu"><summary class="menu-toggle" aria-label="فتح القائمة الجانبية">☰</summary><div class="site-menu-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+            <a href="ideas.html">الأفكار والمقترحات</a><a href="privacy.html">الخصوصية وإخلاء المسؤولية</a>
+            <a href="pc-development.html">التطوير عبر الحاسوب</a><a href="mobile-development.html" aria-current="page">التطوير عبر الهاتف</a>
+            <button type="button" data-site-theme-toggle>التبديل إلى الوضع الفاتح</button>
+        </div></details>
+        <div class="site-nav-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+        </div>
+    </nav>
+    <main>
+        <header class="panel">
+            <p>Mobile AI Development Hub</p>
+            <h1>دليل وتطوير الهاتف بالذكاء الاصطناعي</h1>
+            <p>تعلم البرمجة من الهاتف بمساعدة النماذج الذكية. اختر نظامك اختياريًا لمشاهدة البيئات الأقرب للتوافق؛ لا نطلب صلاحيات ولا نفحص الجهاز تلقائيًا.</p>
+            <label class="field" for="mobile-os">نوع النظام وإصداره
+                <select id="mobile-os"><option value="all">عرض كل البيئات</option><option value="android-modern">Android 12 وفوق</option><option value="android-8-11">Android 8 إلى 11</option><option value="android-legacy">Android قديم / موارد محدودة</option><option value="ios-17-plus">iOS 17 وفوق</option><option value="ios-15-16">iOS 15 إلى 16</option><option value="ios-14-older">iOS 14 أو أقدم</option></select>
+            </label>
+            <p id="mobile-advice" role="status" aria-live="polite"></p>
+        </header>
+        <section class="panel" aria-labelledby="models-title">
+            <h2 id="models-title">المساعد المناسب للتعلم من الهاتف</h2>
+            <div class="model-grid">
+                <article class="mini-card"><h3>ChatGPT</h3><p>اطلب مثالًا صغيرًا يناسب تطبيقك، واشرح القيود وإصدار النظام قبل تشغيله.</p><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">فتح ChatGPT</a></article>
+                <article class="mini-card"><h3>Google Gemini</h3><p>استفد من شرح JavaScript والويب وخطوات استخدام الأدوات السحابية من المتصفح.</p><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">فتح Gemini</a></article>
+                <article class="mini-card"><h3>Claude</h3><p>اطلب شرح الأخطاء ومراجعة مقتطفات الكود مع مراعاة موارد الهاتف.</p><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">فتح Claude</a></article>
+            </div>
+        </section>
+        <section class="panel" aria-labelledby="environments-title">
+            <h2 id="environments-title">بيئات الهاتف والسحابة</h2>
+            <div class="environment-grid">
+                <article class="mini-card environment-card" data-environment="android"><h3>Termux — Android</h3><p>طرفية لتجربة Python على Android. ثبّت من المصدر الرسمي وراجع التوافق قبل إضافة الحزم.</p><pre id="termux-command">pkg update
+pkg install python
+python --version</pre><button class="action-button" type="button" data-copy="termux-command">نسخ الأوامر</button> <a href="https://termux.dev/en/" target="_blank" rel="noopener noreferrer">الموقع الرسمي</a></article>
+                <article class="mini-card environment-card" data-environment="android"><h3>Pydroid 3 — Android</h3><p>بيئة تعليمية لتشغيل أمثلة Python البسيطة، حسب دعم الإصدار والتطبيق لجهازك.</p><pre id="pydroid-command">python --version
+python main.py</pre><button class="action-button" type="button" data-copy="pydroid-command">نسخ الأوامر</button></article>
+                <article class="mini-card environment-card" data-environment="cloud"><h3>Google Colab — سحابي</h3><p>شغّل دفاتر Python في المتصفح؛ مناسب لـ iOS والأجهزة محدودة الموارد ويتطلب اتصالًا بالإنترنت.</p><a href="https://colab.research.google.com/" target="_blank" rel="noopener noreferrer">فتح Colab</a></article>
+                <article class="mini-card environment-card" data-environment="ios"><h3>JavaScript والويب — iOS</h3><p>تجربة JavaScript عبر أدوات الويب مناسبة لكثير من أجهزة iOS؛ تشغيل الحزم محليًا محدود.</p></article>
+            </div>
+        </section>
+        <section class="panel" aria-labelledby="mobile-language-title">
+            <h2 id="mobile-language-title">مختبر الأكواد على الهاتف</h2>
+            <div class="tabs" role="tablist" aria-label="اختر لغة البرمجة">
+                <button type="button" role="tab" data-lang="python" aria-selected="true" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" loading="lazy"> Python</button><button type="button" role="tab" data-lang="cpp" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="" loading="lazy"> C++</button><button type="button" role="tab" data-lang="csharp" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="" loading="lazy"> C#</button><button type="button" role="tab" data-lang="javascript" aria-selected="false" data-umami-event="Code Tab Clicked"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="" loading="lazy"> JavaScript</button>
+            </div>
+            <article class="mini-card" role="tabpanel" aria-live="polite">
+                <h3 id="language-name">Python</h3><p id="language-description">ابدأ بأمثلة صغيرة، وشغّلها محليًا على Android عند التوافق أو استخدم Colab سحابيًا.</p>
+                <pre><code id="language-code">name = "Shuaib"
+print(f"Hello, {name}!")</code></pre>
+                <div class="action-row"><button class="action-button" type="button" data-copy="language-code">نسخ الكود</button><button class="action-button primary" type="button" id="run-code">تشغيل المحاكاة</button></div>
+                <h3>Terminal تجريبي</h3><output class="terminal" id="terminal-output" aria-live="polite">هذه محاكاة محلية؛ لا يتم تشغيل كود حقيقي على جهازك.</output>
+                <aside class="mini-card run-guide" aria-live="polite">
+                    <h3>أين أضع الكود؟</h3>
+                    <p id="language-run-guide">على Android افتح Pydroid 3، أنشئ ملفًا باسم main.py، الصق كود Python واضغط زر التشغيل. أو احفظه في Termux باسم main.py ثم نفّذ python main.py.</p>
+                </aside>
+            </article>
+        </section>
+        <section class="panel" aria-labelledby="mobile-examples-title">
+            <h2 id="mobile-examples-title">أمثلة عملية لتشغيل الأكواد من الهاتف</h2>
+            <div class="environment-grid">
+                <article class="mini-card">
+                    <h3>مثال Python في Pydroid 3</h3>
+                    <p>أنشئ ملفًا جديدًا باسم <code>main.py</code> في محرر التطبيق، الصق المثال واضغط زر التشغيل. المحاكاة هنا للشرح فقط ولا تشغّل الكود على الهاتف.</p>
+                    <pre><code id="mobile-python-example">numbers = [12, 8, 5]
+print("المجموع:", sum(numbers))</code></pre>
+                    <div class="action-row"><button class="action-button" type="button" data-copy="mobile-python-example">نسخ المثال</button><button class="action-button primary" type="button" data-mobile-simulate="python">عرض ناتج تجريبي</button></div>
+                </article>
+                <article class="mini-card">
+                    <h3>مثال JavaScript عبر Termux</h3>
+                    <p>بعد تثبيت Node.js في Termux، احفظ النص في <code>main.js</code> ثم شغّله بالأمر <code>node main.js</code>. تحقق من توافق الحزم قبل تثبيتها.</p>
+                    <pre><code id="mobile-js-example">const scores = [12, 8, 5];
+console.log("المجموع:", scores.reduce((sum, score) => sum + score, 0));</code></pre>
+                    <div class="action-row"><button class="action-button" type="button" data-copy="mobile-js-example">نسخ المثال</button><button class="action-button primary" type="button" data-mobile-simulate="javascript">عرض ناتج تجريبي</button></div>
+                </article>
+            </div>
+            <output class="terminal" id="mobile-example-output" aria-live="polite">ستظهر هنا نتيجة المثال التجريبية.</output>
+        </section>
+        <p>التوافق يتغير بحسب إصدار النظام والمنطقة ومصدر التطبيق. لا تدخل بيانات حساسة أو مفاتيح API في الأدوات أو المحادثات الخارجية.</p>
+    </main>
+    <footer class="site-footer"><span>مشروع شعيب © 2026</span><a href="ideas.html">المقترحات</a><a href="privacy.html">الخصوصية</a><a href="pc-development.html">دليل الحاسوب</a><a href="mobile-development.html">دليل الهاتف</a></footer>
+    <script>
+        const examples = {
+            python: { title:'Python', description:'أمثلة صغيرة عبر Pydroid/Termux عند التوافق أو Colab سحابيًا.', code:'name = "Shuaib"\nprint(f"Hello, {name}!")', output:'Hello, Shuaib!', guide:'على Android افتح Pydroid 3، أنشئ ملفًا باسم main.py، الصق كود Python واضغط زر التشغيل. أو احفظه في Termux باسم main.py ثم نفّذ python main.py.' },
+            cpp: { title:'C++', description:'لغة مترجمة؛ بناء وتشغيل مشاريع C++ الكبيرة من الهاتف قد يحتاج بيئة متخصصة أو خدمة سحابية.', code:'#include <iostream>\nint main() {\n  std::cout << "Hello, Shuaib!";\n  return 0;\n}', output:'Hello, Shuaib!', guide:'على الهاتف، جرّب بيئة مترجم موثوقة تدعم C++ أو خدمة سحابية. أنشئ ملفًا بامتداد .cpp ثم ابنِه وشغّله؛ قد تكون هذه اللغة ثقيلة على الأجهزة المحدودة.' },
+            csharp: { title:'C#', description:'تعمل غالبًا عبر أدوات .NET على الحاسوب أو بيئات تطوير سحابية متوافقة.', code:'using System;\nConsole.WriteLine("Hello, Shuaib!");', output:'Hello, Shuaib!', guide:'تشغيل C# محليًا محدود على كثير من الهواتف. استخدم بيئة سحابية متوافقة مع .NET، أو أنشئ ملف Program.cs في محرر يدعم C# واتبع تعليماته.' },
+            javascript: { title:'JavaScript', description:'خيار عملي لتجارب الويب مباشرةً عبر متصفح الهاتف.', code:'const name = "Shuaib";\nconsole.log(`Hello, ${name}!`);', output:'Hello, Shuaib!', guide:'استخدم محرر الويب في المتصفح، أو احفظ الملف باسم main.js في Termux بعد تثبيت Node.js ثم نفّذ node main.js.' }
+        };
+        let currentLanguage = 'python';
+        const deviceChoice = document.querySelector('#mobile-os');
+        const advice = document.querySelector('#mobile-advice');
+        function updateDevice() {
+            const selected = deviceChoice.value;
+            const ios = selected.startsWith('ios-');
+            document.querySelectorAll('.environment-card').forEach((card) => {
+                card.hidden = selected !== 'all' && (card.dataset.environment === 'android' ? ios : card.dataset.environment === 'ios' ? !ios : false);
+            });
+            advice.textContent = selected === 'all' ? 'اختر إصدارًا لتصفية البيئات. الكشف اليدوي اختياري ولا تُرسل معلومات الجهاز.' :
+                selected.startsWith('android-') ? 'توصية Android: جرّب Python عبر Termux أو Pydroid 3 بعد التحقق من دعم إصدار جهازك؛ الأجهزة المحدودة تستفيد من Colab.' :
+                'توصية iOS: استخدم JavaScript عبر الويب أو Google Colab لتشغيل Python سحابيًا.';
+        }
+        deviceChoice.addEventListener('change', updateDevice);
+        document.querySelectorAll('[data-lang]').forEach((tab) => tab.addEventListener('click', () => {
+            currentLanguage = tab.dataset.lang;
+            const item = examples[currentLanguage];
+            document.querySelectorAll('[data-lang]').forEach((button) => button.setAttribute('aria-selected', String(button === tab)));
+            document.querySelector('#language-name').textContent = item.title;
+            document.querySelector('#language-description').textContent = item.description;
+            document.querySelector('#language-code').textContent = item.code;
+            document.querySelector('#language-run-guide').textContent = item.guide;
+            document.querySelector('#terminal-output').textContent = 'هذه محاكاة محلية؛ لا يتم تشغيل كود حقيقي على جهازك.';
+        }));
+        document.querySelectorAll('[data-copy]').forEach((button) => button.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(document.getElementById(button.dataset.copy).textContent); button.textContent = 'تم النسخ'; }
+            catch (error) { console.error('Clipboard access failed.', error); button.textContent = 'تعذّر النسخ'; }
+            setTimeout(() => { button.textContent = button.dataset.copy === 'language-code' ? 'نسخ الكود' : 'نسخ الأوامر'; }, 1400);
+        }));
+        document.querySelector('#run-code').addEventListener('click', () => { document.querySelector('#terminal-output').textContent = examples[currentLanguage].output; });
+        document.querySelectorAll('[data-mobile-simulate]').forEach((button) => button.addEventListener('click', () => {
+            const language = button.dataset.mobileSimulate === 'python' ? 'Python' : 'JavaScript';
+            document.querySelector('#mobile-example-output').textContent = `${language}: المجموع 25 — ناتج توضيحي ثابت، لا يتم تنفيذ الكود.`;
+        }));
+        updateDevice();
+    </script>
+    <script src="cmd-simulator.js"></script>
+    <script src="site-navigation.js"></script>
+    <script src="mobile-header-scroll.js"></script>
+</body>
+</html>

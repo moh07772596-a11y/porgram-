@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <style>html { background-color: #0b1d16; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1d16">
+    <title>الأفكار والمقترحات | مشروع شعيب</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="3e3cb453-86c1-4ba3-b889-4e419bc9d649"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --page-bg: #151a16; --page-card: rgba(255,255,255,.075); --page-border: rgba(166,170,132,.25); --page-text: #fff; --page-muted: rgba(255,255,255,.78); --page-accent: #dfc77f; }
+        :root[data-theme="light"] { --page-bg: #f3f4ee; --page-card: #fff; --page-border: rgba(21,34,26,.18); --page-text: #151a16; --page-muted: #4a594d; --page-accent: #286344; }
+        * { box-sizing: border-box; }
+        body { min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 80% 0,rgba(89,132,89,.2),transparent 40rem),var(--page-bg); color: var(--page-text); font: 1rem/1.7 "Segoe UI",Tahoma,sans-serif; }
+        [hidden] { display:none !important; }
+        a { color: inherit; }
+        .site-nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem clamp(1rem,4vw,3rem); border-bottom:1px solid var(--page-border); background:rgba(18,29,22,.92); color:#fff; }
+        :root[data-theme="light"] .site-nav { background:rgba(243,245,255,.96); color:var(--page-text); }
+        .site-brand { font-weight:800; text-decoration:none; white-space:nowrap; }
+        .site-nav-links { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
+        .site-nav-links a,.menu-toggle { padding:.55rem .85rem; border:1px solid var(--page-border); border-radius:999px; background:var(--page-card); color:inherit; text-decoration:none; }
+        .menu-toggle { cursor:pointer; font:inherit; }
+        .site-menu { position:relative; }
+        .site-menu summary { list-style:none; cursor:pointer; }
+        .site-menu summary::-webkit-details-marker { display:none; }
+        .site-menu-links { position:fixed; z-index:30; inset-block:0; inset-inline-end:0; display:grid; align-content:start; width:min(22rem,88vw); height:100dvh; gap:.4rem; padding:4.5rem 1rem 1rem; border:1px solid var(--page-border); border-radius:0 0 0 18px; background:var(--page-bg); box-shadow:-18px 0 48px rgba(0,0,0,.4); }
+        .site-menu-links a { padding:.65rem .8rem; border-radius:10px; text-decoration:none; }
+        .site-menu-links a:hover,.site-menu-links a:focus-visible { background:var(--page-card); }
+        main { width:min(100% - 2rem,850px); margin:0 auto; padding:clamp(2rem,7vw,5rem) 0; }
+        .page-card { padding:clamp(1.25rem,5vw,2.5rem); border:1px solid var(--page-border); border-radius:24px; background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow:0 22px 65px rgba(18,29,22,.25); backdrop-filter:blur(16px); }
+        .appreciation-card { margin:1.25rem 0 1.5rem; padding:1rem 1.15rem; border:1px solid rgba(166,170,132,.42); border-radius:16px; background:linear-gradient(135deg,rgba(91,137,95,.22),rgba(255,255,255,.08)); color:var(--page-text); box-shadow:0 12px 32px rgba(18,29,22,.18); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+        .appreciation-card p { margin:0; }
+        :root[data-theme="light"] .appreciation-card { border-color:rgba(49,92,59,.25); background:linear-gradient(135deg,rgba(166,170,132,.56),rgba(255,255,255,.94)); }
+        h1 { margin:.2rem 0 .75rem; font-size:clamp(2rem,6vw,3rem); line-height:1.2; }
+        .page-intro,.privacy-note { color:var(--page-muted); }
+        .feedback-form { display:grid; gap:.75rem; margin-top:1.5rem; }
+        .feedback-form label { font-weight:700; }
+        .feedback-form textarea { width:100%; min-height:11rem; padding:1rem; border:1px solid var(--page-border); border-radius:14px; background:rgba(0,0,25,.45); color:var(--page-text); font:inherit; resize:vertical; }
+        :root[data-theme="light"] .feedback-form textarea { background:#f7f8ff; }
+        .feedback-form button,.secondary-button { justify-self:start; min-height:2.9rem; padding:.65rem 1.15rem; border:0; border-radius:999px; background:var(--page-accent); color:#151a16; font:inherit; font-weight:800; cursor:pointer; }
+        :root[data-theme="light"] .feedback-form button,:root[data-theme="light"] .secondary-button { color:#fff; }
+        .feedback-form button:hover,.feedback-form button:focus-visible { filter:brightness(1.1); }
+        .form-status { min-height:1.6em; margin:0; color:var(--page-muted); }
+        .success-toast { position:fixed; z-index:10001; inset-inline:1rem; inset-block-end:1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; width:min(38rem,calc(100% - 2rem)); margin-inline:auto; padding:.9rem 1rem; border:1px solid rgba(166,170,132,.55); border-radius:16px; background:rgba(9,17,62,.94); color:#fff; box-shadow:0 18px 48px rgba(18,29,22,.38); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+        .success-toast p { margin:0; font-weight:700; }
+        .toast-close { display:grid; width:2.5rem; height:2.5rem; flex:0 0 auto; place-items:center; border:1px solid rgba(255,255,255,.55); border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font:700 1.35rem/1 "Segoe UI",Tahoma,sans-serif; cursor:pointer; }
+        .toast-close:hover,.toast-close:focus-visible { background:rgba(255,255,255,.24); outline:2px solid #fff; outline-offset:2px; }
+        :root[data-theme="light"] .success-toast { border-color:rgba(49,92,59,.3); background:rgba(255,255,255,.97); color:#151a16; box-shadow:0 18px 48px rgba(21,34,26,.2); }
+        :root[data-theme="light"] .toast-close { border-color:#286344; background:#286344; color:#fff; }
+        :root[data-theme="light"] .toast-close:hover,:root[data-theme="light"] .toast-close:focus-visible { background:#315f42; outline-color:#286344; }
+        .saved-ideas { display:grid; gap:.65rem; margin-top:2rem; }
+        .saved-ideas article { padding:.9rem 1rem; border:1px solid var(--page-border); border-radius:12px; background:var(--page-card); overflow-wrap:anywhere; }
+        .saved-ideas h2 { font-size:1.25rem; }
+        .site-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.7rem; padding:1.25rem; background:#151a16; color:#fff; text-align:center; }
+        .site-footer a { padding:.4rem .7rem; border:1px solid rgba(255,255,255,.3); border-radius:999px; text-decoration:none; }
+        @media(max-width:620px) { .site-nav { align-items:flex-start; flex-wrap:wrap; } .site-nav-links { width:100%; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav site-header-nav" aria-label="التنقل الرئيسي">
+        <a class="site-brand brand logo-container" href="index.html" aria-label="TIK CODE DZ — الصفحة الرئيسية"><img src="assets/tik-code-dz-logo.png" alt="TIK CODE DZ" class="brand-logo-image"></a>
+        <div class="national-flags" role="group" aria-label="الأعلام الوطنية">
+            <img src="assets/algeria-flag.png" alt="علم الجزائر">
+            <img src="assets/palestine-flag.png" alt="علم فلسطين">
+        </div>
+        <div class="language-switcher-container" id="language-switcher-container" role="group" aria-label="اختيار اللغة"></div>
+        <details class="site-menu"><summary class="menu-toggle" aria-label="فتح القائمة الجانبية">☰</summary><div class="site-menu-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+            <a href="ideas.html" aria-current="page">الأفكار والمقترحات</a><a href="privacy.html">الخصوصية وإخلاء المسؤولية</a>
+            <a href="pc-development.html">التطوير عبر الحاسوب</a><a href="mobile-development.html">التطوير عبر الهاتف</a>
+            <button type="button" data-site-theme-toggle>التبديل إلى الوضع الفاتح</button>
+        </div></details>
+        <div class="site-nav-links">
+            <a href="index.html">الرئيسية</a><a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a><a href="sheet-tutorial.html">شرح Sheets</a><a href="programming-lab.html">مختبر البرمجة</a>
+        </div>
+    </nav>
+    <main>
+        <section class="page-card" aria-labelledby="ideas-title">
+            <p>Ideas &amp; Feedback</p>
+            <h1 id="ideas-title">شاركنا فكرتك أو مقترحك</h1>
+            <p class="page-intro">ما الميزة أو الشرح أو المثال الذي سيساعدك في التعلم؟ اكتب اقتراحك وسنحتفظ به محليًا في هذا المتصفح.</p>
+            <aside class="appreciation-card" aria-label="رسالة ترحيب وشكر">
+                <p>أهلاً بك! أنا شعيب، وممتن جداً لوقتك ورأيك. أفكارك ومقترحاتك هي المحرك الأساسي لتطوير هذا الموقع وتحديثه باستمرار. شكراً لمساهمتك في بناء هذه المنصة!</p>
+            </aside>
+            <form class="feedback-form" id="ideas-form">
+                <label for="idea-message">المقترح</label>
+                <textarea id="idea-message" name="suggestion" maxlength="500" required placeholder="اكتب فكرتك هنا..."></textarea>
+                <button type="submit" data-umami-event="Submit Proposal">حفظ المقترح</button>
+                <p class="privacy-note">هذا مشروع ثابت بلا خادم خلفي؛ لا يُرسل المقترح إلى المطور. يبقى محفوظًا على هذا الجهاز فقط.</p>
+                <p class="form-status" id="ideas-status" role="status" aria-live="polite"></p>
+            </form>
+            <section class="saved-ideas" aria-labelledby="saved-ideas-title">
+                <h2 id="saved-ideas-title">مقترحات هذا المتصفح</h2>
+                <div id="saved-ideas-list" aria-live="polite"></div>
+            </section>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <span>مشروع شعيب © 2026</span><a href="ideas.html">المقترحات</a><a href="privacy.html">الخصوصية</a>
+        <a href="pc-development.html">دليل الحاسوب</a><a href="mobile-development.html">دليل الهاتف</a>
+    </footer>
+    <div class="success-toast" id="ideas-success-toast" hidden>
+        <p id="ideas-success-message" role="status" aria-live="polite" aria-atomic="true">تم استلام رأيك بنجاح! شكراً لك من القلب على دعمك ومساهمتك القيمة.</p>
+        <button class="toast-close" id="ideas-toast-close" type="button" aria-label="إغلاق إشعار النجاح">×</button>
+    </div>
+    <script>
+        const storageKey = 'shuaib-project-feedback-v1';
+        const form = document.querySelector('#ideas-form');
+        const message = document.querySelector('#idea-message');
+        const status = document.querySelector('#ideas-status');
+        const list = document.querySelector('#saved-ideas-list');
+        const successToast = document.querySelector('#ideas-success-toast');
+        const closeToast = document.querySelector('#ideas-toast-close');
+        let toastTimeout;
+
+        function hideSuccessToast() {
+            successToast.hidden = true;
+            window.clearTimeout(toastTimeout);
+        }
+
+        function showSuccessToast() {
+            successToast.hidden = false;
+            window.clearTimeout(toastTimeout);
+            toastTimeout = window.setTimeout(hideSuccessToast, 7000);
+        }
+
+        closeToast.addEventListener('click', hideSuccessToast);
+
+        function renderIdeas() {
+            let ideas;
+            try {
+                ideas = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            } catch (error) {
+                console.error('Saved ideas could not be read.', error);
+                status.textContent = 'تعذّرت قراءة المقترحات المحفوظة في هذا المتصفح.';
+                return;
+            }
+            if (!Array.isArray(ideas)) throw new TypeError('Saved ideas must be a list.');
+            list.replaceChildren();
+            for (const idea of ideas) {
+                const text = typeof idea === 'string' ? idea : idea?.message;
+                if (typeof text !== 'string' || !text.trim()) continue;
+                const item = document.createElement('article');
+                item.textContent = text;
+                list.append(item);
+            }
+            if (!list.childElementCount) list.textContent = 'لا توجد مقترحات محفوظة بعد.';
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const suggestion = message.value.trim();
+            if (!suggestion) {
+                status.textContent = 'اكتب المقترح قبل حفظه.';
+                return;
+            }
+            try {
+                const ideas = JSON.parse(localStorage.getItem(storageKey) || '[]');
+                if (!Array.isArray(ideas)) throw new TypeError('Saved ideas must be a list.');
+                ideas.push({ message: suggestion, createdAt: new Date().toISOString() });
+                localStorage.setItem(storageKey, JSON.stringify(ideas.slice(-20)));
+                message.value = '';
+                status.textContent = 'تم حفظ المقترح محليًا في هذا المتصفح.';
+                renderIdeas();
+                showSuccessToast();
+            } catch (error) {
+                console.error('The suggestion could not be saved locally.', error);
+                status.textContent = 'تعذّر حفظ المقترح. تحقق من مساحة التخزين في المتصفح.';
+            }
+        });
+        renderIdeas();
+    </script>
+    <script src="cmd-simulator.js"></script>
+    <script src="site-navigation.js"></script>
+    <script src="mobile-header-scroll.js"></script>
+</body>
+</html>

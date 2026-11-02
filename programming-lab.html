@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <style>html { background-color: #0b1d16; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1d16">
+    <meta name="description" content="مختبر تعليمي تفاعلي لتعلّم Python وJavaScript وC++ وC# وC.">
+    <title>مختبر لغات البرمجة | مشروع شعيب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="programming-lab.css">
+</head>
+<body class="programming-lab-page">
+    <nav class="site-header-nav" aria-label="التنقل الرئيسي">
+        <a class="brand site-brand logo-container" href="index.html" aria-label="TIK CODE DZ — الصفحة الرئيسية">
+            <img src="assets/tik-code-dz-logo.png" alt="TIK CODE DZ" class="brand-logo-image">
+        </a>
+        <div class="site-nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="ai-models.html">نماذج الذكاء الاصطناعي</a>
+            <a href="programming-lab.html" aria-current="page">مختبر البرمجة</a>
+            <a href="index.html#interactive-tools">الأدوات التفاعلية</a>
+        </div>
+    </nav>
+    <aside class="mobile-desktop-banner" data-mobile-desktop-banner role="note" hidden>
+        <span>لتجربة أفضل ومختبر برمجة متكامل، يُفضّل تفعيل «وضع سطح المكتب» 🖥️ من إعدادات المتصفح.</span>
+        <button type="button" data-mobile-desktop-banner-close aria-label="إغلاق التنبيه">×</button>
+    </aside>
+    <main class="programming-lab-main">
+        <header class="programming-lab-intro">
+            <p class="programming-lab-eyebrow">TIK CODE DZ · PROGRAMMING LAB</p>
+            <h1>مختبر لغات البرمجة</h1>
+            <p>اختر لغة، عدّل الشيفرة، ثم جرّبها في محرر مصغر يحاكي بيئة التطوير والطرفية.</p>
+        </header>
+
+        <section class="programming-language-hub" aria-labelledby="language-hub-title" dir="rtl">
+            <h2 id="language-hub-title">لغات البرمجة والتطبيقات</h2>
+            <p>أمثلة تعليمية توضّح شكل الشيفرة ومسار التنفيذ. صحة البرنامج تعتمد على مراجعة الشيفرة واختبارها في البيئة المناسبة.</p>
+            <div class="programming-language-tabs" role="tablist" aria-label="اختر لغة البرمجة">
+                <button class="programming-language-tab" id="tab-python" type="button" role="tab" aria-controls="language-panel" aria-selected="true" tabindex="0" data-language="python">Python</button>
+                <button class="programming-language-tab" id="tab-javascript" type="button" role="tab" aria-controls="language-panel" aria-selected="false" tabindex="-1" data-language="javascript">JavaScript</button>
+                <button class="programming-language-tab" id="tab-cpp" type="button" role="tab" aria-controls="language-panel" aria-selected="false" tabindex="-1" data-language="cpp">C++</button>
+                <button class="programming-language-tab" id="tab-csharp" type="button" role="tab" aria-controls="language-panel" aria-selected="false" tabindex="-1" data-language="csharp">C#</button>
+                <button class="programming-language-tab" id="tab-c" type="button" role="tab" aria-controls="language-panel" aria-selected="false" tabindex="-1" data-language="c">C</button>
+            </div>
+            <article class="programming-language-panel" id="language-panel" role="tabpanel" aria-labelledby="tab-python">
+                <header class="programming-language-heading">
+                    <div>
+                        <p class="programming-language-kicker" id="language-tagline">البيانات والأتمتة والذكاء الاصطناعي</p>
+                        <h2 id="language-name">Python</h2>
+                    </div>
+                    <img id="language-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="شعار Python">
+                </header>
+                <p id="language-explanation">Python لغة سهلة القراءة. يخزّن المثال الاسم في متغير، ثم يطبع رسالة ترحيب منسّقة في الطرفية.</p>
+                <div class="programming-environments">
+                    <p><strong>للحاسوب:</strong> <span id="language-desktop">VS Code مع Python، أو الطرفية بعد تثبيت Python.</span></p>
+                    <p><strong>للهاتف:</strong> <span id="language-mobile">جرّب Python عبر Pydroid 3 أو Termux، أو استخدم Google Colab سحابيًا.</span></p>
+                </div>
+                <section class="programming-playground" aria-label="محرر الأكواد">
+                    <div class="programming-terminal-toolbar">
+                        <strong id="editor-title">main.py</strong>
+                        <span class="programming-editor-hint">محرر تجريبي · TIK CODE DZ</span>
+                    </div>
+                    <div class="programming-workspace">
+                        <aside class="programming-snippets" aria-labelledby="snippets-title">
+                            <h3 id="snippets-title">أمثلة جاهزة</h3>
+                            <p>اختر مثالاً بسيطاً لتشاهد الشيفرة والنتيجة مباشرة.</p>
+                            <div id="snippet-list" class="programming-snippet-list"></div>
+                        </aside>
+                        <div class="programming-editor-column">
+                            <div class="programming-editor" dir="ltr">
+                                <div class="programming-line-numbers" id="editor-line-numbers" aria-hidden="true">1</div>
+                                <label class="programming-editor-label" for="code-editor">محرر الشيفرة</label>
+                                <textarea id="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="محرر الشيفرة" wrap="off"></textarea>
+                            </div>
+                            <div class="programming-terminal">
+                                <div class="programming-terminal-toolbar">
+                                    <strong id="terminal-title">Terminal · Python</strong>
+                                    <button id="run-example" type="button">تشغيل الكود</button>
+                                </div>
+                                <pre id="terminal-output" dir="ltr" aria-live="polite">Hello, Sara!</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h3>خطوات المثال</h3>
+                <ol class="programming-steps" id="language-steps">
+                    <li>يُخزّن الاسم Sara في المتغير name.</li>
+                    <li>تضيف f-string الاسم إلى رسالة الترحيب.</li>
+                    <li>تطبع print الرسالة في الطرفية.</li>
+                </ol>
+                <p class="programming-flow" id="language-flow">ملف Python ← المفسّر ← النتيجة</p>
+                <p class="programming-simulation-note" id="execution-note">JavaScript تعمل داخل إطار معزول. بقية اللغات تعرض أمثلتها ومخرجاتها كمحاكاة تعليمية ولا تستبدل المترجم الحقيقي.</p>
+            </article>
+        </section>
+
+        <section class="programming-learning-grid" aria-label="مواد وأفكار تعليمية">
+            <article class="programming-learning-card">
+                <h2>فيديو تعليمي</h2>
+                <p>دورة تمهيدية في Python للمبتدئين. يتطلب الفيديو اتصالًا بالإنترنت.</p>
+                <div class="programming-video">
+                    <iframe src="https://www.youtube-nocookie.com/embed/rfscVS0vtbw?cc_load_policy=1" title="دورة Python للمبتدئين" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </article>
+            <article class="programming-learning-card">
+                <h2>أفكار أساسية في البرمجة</h2>
+                <ul class="programming-concepts">
+                    <li><strong>المتغيرات:</strong> أسماء تشير إلى قيم تستخدمها الشيفرة.</li>
+                    <li><strong>الشروط:</strong> اختيار مسار التنفيذ وفق تحقق شرط.</li>
+                    <li><strong>الحلقات:</strong> تكرار خطوات على عناصر أو قيم.</li>
+                    <li><strong>الدوال:</strong> تنظيم الخطوات وإعادة استخدامها.</li>
+                    <li><strong>الاختبار:</strong> فحص أمثلة وحالات متعددة والتحقق من المخرجات.</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+    <footer class="programming-lab-footer">
+        <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+        <a href="pc-development.html">بيئات تطوير الحاسوب</a>
+    </footer>
+    <script src="programming-lab.js"></script>
+    <script src="mobile-desktop-banner.js"></script>
+    <script src="mobile-header-scroll.js"></script>
+</body>
+</html>

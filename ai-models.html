@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+    <style>html { background-color: #0b1d16; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1d16">
+    <title>نماذج الذكاء الاصطناعي</title>
+    <script defer="" src="https://cloud.umami.is/script.js" data-website-id="3e3cb453-86c1-4ba3-b889-4e419bc9d649"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            --midnight: #0b1d16;
+            --surface: rgba(255, 255, 255, 0.07);
+            --surface-hover: rgba(255, 255, 255, 0.13);
+            --border: rgba(255, 255, 255, 0.22);
+            --text: #fff;
+            --muted: rgba(255, 255, 255, 0.82);
+            --shadow: rgba(3, 17, 10, 0.32);
+            --nav-bg: rgba(8, 29, 20, 0.92);
+            --glow-blue: rgba(33, 132, 77, 0.2);
+            --glow-violet: rgba(210, 16, 52, 0.1);
+        }
+
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --midnight: #f3f8f4;
+            --surface: rgba(21, 34, 26, 0.055);
+            --surface-hover: rgba(21, 34, 26, 0.11);
+            --border: rgba(21, 34, 26, 0.2);
+            --text: #17291f;
+            --muted: rgba(23, 41, 31, 0.76);
+            --shadow: rgba(24, 66, 42, 0.1);
+            --nav-bg: rgba(243, 248, 244, 0.94);
+            --glow-blue: rgba(37, 143, 82, 0.09);
+            --glow-violet: rgba(200, 16, 46, 0.055);
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 12% 10%, var(--glow-blue), transparent 34rem),
+                radial-gradient(ellipse at 90% 30%, var(--glow-violet), transparent 32rem),
+                var(--midnight);
+            color: var(--text);
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .announcement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.65rem 1rem;
+            background: rgba(91, 137, 95, 0.18);
+            color: var(--text);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .announcement[hidden],
+        .back-to-top[hidden] {
+            display: none;
+        }
+
+        .announcement button,
+        .theme-toggle,
+        .back-to-top,
+        .share-links a {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .announcement button {
+            padding: 0.25rem 0.65rem;
+            white-space: nowrap;
+        }
+
+        .theme-toggle {
+            padding: 0.55rem 0.85rem;
+            white-space: nowrap;
+        }
+
+        .section-drawer {
+            width: min(25rem, calc(100vw - 2rem));
+            max-height: min(88vh, 48rem);
+            margin: auto 0 auto auto;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 1rem 0 0 1rem;
+            background: var(--midnight);
+            color: var(--text);
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .section-drawer[open] {
+            position: fixed;
+            inset: 0 0 0 auto;
+            display: grid;
+            align-content: start;
+            gap: 1rem;
+        }
+
+        .section-drawer::backdrop {
+            background: rgba(18, 29, 22, 0.65);
+            backdrop-filter: blur(4px);
+        }
+
+        .drawer-heading,
+        .drawer-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.65rem;
+        }
+
+        .drawer-heading h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .drawer-close {
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface-hover);
+            color: var(--text);
+            font: inherit;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .drawer-links {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .drawer-links a,
+        .drawer-actions button {
+            padding: 0.7rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            text-align: start;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .drawer-actions {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .announcement button:hover,
+        .theme-toggle:hover,
+        .theme-toggle:focus-visible,
+        .back-to-top:hover,
+        .share-links a:hover {
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem clamp(1rem, 5vw, 3rem);
+            border-bottom: 1px solid var(--border);
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            width: 2rem;
+            height: 2rem;
+            padding: 0.25rem;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 2.8rem;
+            height: 2.8rem;
+            flex: 0 0 auto;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .menu-toggle svg {
+            width: 1.35rem;
+            height: 1.35rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-width: 2;
+        }
+
+        .menu-toggle:focus-visible {
+            outline: 3px solid #dfc77f;
+            outline-offset: 3px;
+        }
+
+        .nav-links a,
+        .model-link,
+        .nav-cta,
+        .auth-open {
+            display: inline-block;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible,
+        .nav-links a[aria-current="page"],
+        .model-link:hover,
+        .model-link:focus-visible,
+        .nav-cta:hover,
+        .nav-cta:focus-visible,
+        .auth-open:hover,
+        .auth-open:focus-visible {
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #6d8cff, #7564e8);
+            box-shadow: 0 10px 24px rgba(88, 106, 230, 0.24);
+            color: #fff !important;
+        }
+
+        .nav-cta:hover,
+        .nav-cta:focus-visible {
+            background: linear-gradient(135deg, #83a0ff, #8878f5);
+        }
+
+        .auth-open {
+            background: linear-gradient(135deg, #6d8cff, #7564e8);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .auth-dialog {
+            width: min(100% - 2rem, 440px);
+            max-height: min(90vh, 760px);
+            padding: 0;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 85% 0, rgba(91, 137, 95, 0.2), transparent 55%),
+                var(--midnight);
+            box-shadow: 0 28px 90px rgba(18, 29, 22, 0.55);
+            color: var(--text);
+        }
+
+        .auth-dialog::backdrop {
+            background: rgba(18, 29, 22, 0.74);
+            backdrop-filter: blur(6px);
+        }
+
+        .auth-content {
+            padding: clamp(1.25rem, 5vw, 2rem);
+        }
+
+        .auth-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .auth-heading h2 {
+            margin: 0 0 0.35rem;
+            font-size: 1.5rem;
+        }
+
+        .auth-heading p,
+        .auth-note {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .auth-close {
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            flex: 0 0 auto;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            font: inherit;
+            font-size: 1.2rem;
+        }
+
+        .auth-modes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface);
+        }
+
+        .auth-mode {
+            min-height: 2.7rem;
+            border: 0;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        .auth-mode[aria-pressed="true"] {
+            background: linear-gradient(135deg, #6d8cff, #7564e8);
+            color: #fff;
+        }
+
+        .auth-fields {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .auth-fields label {
+            display: grid;
+            gap: 0.35rem;
+            font-weight: 600;
+        }
+
+        .auth-name-field[hidden] {
+            display: none;
+        }
+
+        .auth-fields input {
+            width: 100%;
+            min-height: 2.9rem;
+            padding: 0.65rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+        }
+
+        .auth-fields input:focus-visible,
+        .auth-close:focus-visible,
+        .auth-mode:focus-visible,
+        .auth-provider:focus-visible,
+        .auth-submit:focus-visible {
+            outline: 3px solid #91a7ff;
+            outline-offset: 2px;
+        }
+
+        .auth-submit,
+        .auth-provider {
+            display: flex;
+            width: 100%;
+            min-height: 2.9rem;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 0.65rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            color: var(--text);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .auth-submit {
+            margin-top: 0.15rem;
+            border-color: transparent;
+            background: linear-gradient(135deg, #6d8cff, #7564e8);
+            color: #fff;
+        }
+
+        .auth-provider {
+            background: var(--surface);
+        }
+
+        .auth-submit:hover,
+        .auth-provider:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px var(--shadow);
+        }
+
+        .auth-provider svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            height: 1px;
+            flex: 1;
+            background: var(--border);
+            content: "";
+        }
+
+        .auth-note {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            font-size: 0.88rem;
+        }
+
+        .auth-status {
+            min-height: 1.5em;
+            margin: 0.75rem 0 0;
+            color: #dfc77f;
+            font-size: 0.92rem;
+        }
+
+        :root[data-theme="light"] .auth-status {
+            color: #286344;
+        }
+
+        header {
+            position: relative;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 0 0 24px 24px;
+            background:
+                radial-gradient(ellipse at 80% 0, rgba(110, 137, 255, 0.2), transparent 50%),
+                linear-gradient(135deg, var(--surface), transparent);
+            box-shadow: 0 24px 70px rgba(18, 29, 22, 0.16);
+            text-align: center;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0 0 0.75rem;
+            font-size: clamp(2.3rem, 7vw, 3.5rem);
+        }
+
+        .intro {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+            gap: 1.25rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        .model-tools,
+        .comparison-section,
+        .faq-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 2rem;
+        }
+
+        .model-tools {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(190px, 260px);
+            gap: 0.75rem;
+            align-items: center;
+            padding-top: 1.5rem;
+        }
+
+        .model-tools label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+        }
+
+        .model-tools input,
+        .model-tools select {
+            width: 100%;
+            min-height: 2.9rem;
+            padding: 0.65rem 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--midnight);
+            color: var(--text);
+            font: inherit;
+        }
+
+        .filter-status {
+            grid-column: 1 / -1;
+            min-height: 1.6em;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .model-card[hidden] {
+            display: none;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            padding: 1.5rem;
+            border: 1px dashed var(--border);
+            border-radius: 14px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .comparison-section h2,
+        .faq-section h2 {
+            text-align: center;
+        }
+
+        .comparison-note {
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            min-width: 1240px;
+            border-collapse: collapse;
+            background: var(--surface);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.9rem;
+            border-bottom: 1px solid var(--border);
+            text-align: start;
+            vertical-align: top;
+        }
+
+        .comparison-table th {
+            background: var(--surface-hover);
+        }
+
+        .comparison-table tr:last-child > * {
+            border-bottom: 0;
+        }
+
+        .faq-section {
+            padding-bottom: 3rem;
+        }
+
+        .faq-section details {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .faq-section details p {
+            margin: 0.6rem 0 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .model-card,
+        .model-guide {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--surface);
+        }
+
+        .model-card {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 12px 30px rgba(18, 29, 22, 0.12);
+        }
+
+        .model-card:hover {
+            transform: translateY(-4px);
+            background: var(--surface-hover);
+        }
+
+        .model-card,
+        .model-guide,
+        .model-tools,
+        .comparison-section,
+        .faq-section,
+        .developer-profile,
+        .coming-soon {
+            backdrop-filter: blur(16px);
+        }
+
+        .logo-frame {
+            display: grid;
+            width: 4.5rem;
+            height: 4.5rem;
+            margin-bottom: 1rem;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .model-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            object-fit: contain;
+        }
+
+        .gemini-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: block;
+        }
+
+        .openai-logo {
+            fill: #151a16;
+        }
+
+        .claude-logo {
+            fill: #d97757;
+        }
+
+        .llama-logo {
+            color: #0467df;
+            fill: currentColor;
+        }
+
+        .copilot-logo {
+            color: #0078d4;
+            fill: currentColor;
+        }
+
+        .deepseek-logo {
+            color: #5786fe;
+            fill: currentColor;
+        }
+
+        h2 {
+            margin: 0 0 0.6rem;
+            font-size: 1.5rem;
+        }
+
+        .description {
+            flex: 1;
+            margin: 0 0 1.25rem;
+            line-height: 1.65;
+            opacity: 0.9;
+        }
+
+        .guide-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .guide-section > h2 {
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .model-guide {
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            scroll-margin-top: 1rem;
+        }
+
+        .model-guide h3 {
+            margin: 0 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .bilingual {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .language-panel {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .language-panel h4 {
+            margin: 0 0 0.5rem;
+        }
+
+        .language-panel p {
+            margin: 0;
+            line-height: 1.7;
+            opacity: 0.92;
+        }
+
+        footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer p {
+            margin: 0 0 0.75rem;
+        }
+
+        .share-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .share-links a {
+            padding: 0.45rem 0.8rem;
+        }
+
+        .coming-soon {
+            position: relative;
+            isolation: isolate;
+            max-width: 860px;
+            margin: 0 auto 2.5rem;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            overflow: hidden;
+            border: 1px solid rgba(146, 166, 255, 0.42);
+            border-radius: 1.5rem;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(91, 137, 95, 0.24), transparent 70%),
+                linear-gradient(135deg, rgba(33, 54, 130, 0.32), var(--surface));
+            box-shadow: 0 18px 48px var(--shadow), 0 0 32px rgba(89, 113, 255, 0.14);
+            text-align: center;
+        }
+
+        .coming-soon::before {
+            position: absolute;
+            z-index: -1;
+            top: -5rem;
+            left: 50%;
+            width: 14rem;
+            height: 10rem;
+            border-radius: 50%;
+            background: rgba(99, 126, 255, 0.24);
+            content: "";
+            filter: blur(60px);
+            transform: translateX(-50%);
+        }
+
+        .coming-soon h2 {
+            margin: 0 0 0.65rem;
+            color: var(--text);
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+        }
+
+        .coming-soon p {
+            max-width: 42rem;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            line-height: 1.8;
+        }
+
+        .privacy-banner {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 30;
+            display: flex;
+            max-width: 900px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 0 auto;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(18, 29, 22, 0.88);
+            box-shadow: 0 16px 48px rgba(18, 29, 22, 0.32);
+            color: #fff;
+            backdrop-filter: blur(18px);
+        }
+
+        .privacy-banner[hidden] {
+            display: none;
+        }
+
+        .privacy-banner p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .privacy-banner button,
+        .privacy-link,
+        .privacy-close {
+            min-height: 2.5rem;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid rgba(173, 190, 255, 0.35);
+            border-radius: 999px;
+            background: rgba(110, 137, 255, 0.2);
+            color: inherit;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .privacy-banner button {
+            flex: 0 0 auto;
+        }
+
+        .privacy-banner button:hover,
+        .privacy-link:hover,
+        .privacy-close:hover {
+            background: rgba(110, 137, 255, 0.36);
+        }
+
+        .privacy-dialog {
+            width: min(100% - 2rem, 620px);
+            max-height: min(88vh, 760px);
+            padding: 0;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background:
+                radial-gradient(ellipse at 90% 0, rgba(91, 137, 95, 0.2), transparent 55%),
+                var(--midnight);
+            box-shadow: 0 28px 90px rgba(18, 29, 22, 0.55);
+            color: var(--text);
+        }
+
+        .privacy-dialog::backdrop {
+            background: rgba(18, 29, 22, 0.74);
+            backdrop-filter: blur(6px);
+        }
+
+        .privacy-dialog-content {
+            padding: clamp(1.25rem, 5vw, 2rem);
+        }
+
+        .privacy-dialog-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .privacy-dialog h2 {
+            margin: 0 0 1rem;
+        }
+
+        .privacy-dialog h3 {
+            margin: 1rem 0 0.35rem;
+            font-size: 1.05rem;
+        }
+
+        .privacy-dialog p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .privacy-close {
+            min-width: 2.5rem;
+            padding-inline: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        footer .privacy-link {
+            display: inline-block;
+            margin-top: 0.9rem;
+        }
+
+        @media (max-width: 650px) {
+            .privacy-banner {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .privacy-banner button {
+                width: 100%;
+            }
+        }
+
+        .developer-profile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            max-width: 860px;
+            margin: 0 auto 2.5rem;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            background:
+                radial-gradient(circle at 8% 15%, rgba(91, 137, 95, 0.2), transparent 16rem),
+                var(--surface);
+            box-shadow: 0 18px 48px var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .developer-profile-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .developer-profile-label {
+            margin: 0 0 0.4rem;
+            color: #dfc77f;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        :root[data-theme="light"] .developer-profile-label {
+            color: #286344;
+        }
+
+        .developer-profile h2 {
+            margin: 0;
+            font-size: clamp(1.45rem, 4vw, 1.9rem);
+        }
+
+        .developer-profile-role {
+            margin: 0.35rem 0 0;
+            color: var(--muted);
+        }
+
+        .developer-profile-links {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .developer-profile-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            min-height: 2.9rem;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .developer-profile-link svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+        }
+
+        .developer-profile-link:hover,
+        .developer-profile-link:focus-visible {
+            transform: translateY(-3px);
+            background: var(--surface-hover);
+            box-shadow: 0 10px 24px var(--shadow);
+        }
+
+        .developer-profile-link:focus-visible {
+            outline: 2px solid #dfc77f;
+            outline-offset: 3px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 5;
+            padding: 0.65rem 0.9rem;
+            box-shadow: 0 4px 14px var(--shadow);
+        }
+
+        @media (max-width: 650px) {
+            nav {
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: grid;
+            }
+
+            .nav-links a {
+                width: auto;
+            }
+
+            .model-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+
+            .developer-profile {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .comparison-section {
+            margin-top: 2rem;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+        }
+
+        .comparison-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .comparison-controls select {
+            min-height: 2.5rem;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--midnight);
+            color: var(--text);
+            font: inherit;
+        }
+
+        .comparison-table-wrap {
+            margin-top: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: start;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .comparison-note {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        #model-showcase {
+            width: min(100% - 2rem, 1120px);
+            margin: 2rem auto;
+            padding: clamp(1.1rem, 3vw, 2rem);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: var(--surface);
+        }
+
+        #model-showcase h2 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .showcase-intro {
+            max-width: 720px;
+            margin: 0.6rem auto 1.5rem;
+            color: var(--muted);
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .showcase-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .showcase-model-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.65rem;
+            align-content: start;
+        }
+
+        .showcase-model-button {
+            display: flex;
+            min-height: 4.1rem;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            font-weight: 700;
+            text-align: start;
+            cursor: pointer;
+            transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+        }
+
+        .showcase-model-button:hover,
+        .showcase-model-button[aria-pressed="true"] {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            background: var(--surface-hover);
+        }
+
+        .showcase-model-button:focus-visible,
+        .showcase-controls button:focus-visible,
+        .spotlight-cta:focus-visible {
+            outline: 3px solid #dfc77f;
+            outline-offset: 3px;
+        }
+
+        .showcase-model-mark {
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            flex: 0 0 auto;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 11px;
+            background: #fff;
+            color: var(--text);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .showcase-model-mark img {
+            width: 72%;
+            height: 72%;
+            object-fit: contain;
+        }
+
+        .spotlight-panel {
+            display: flex;
+            min-height: 100%;
+            flex-direction: column;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(69, 184, 122, 0.2), transparent 13rem),
+                var(--surface);
+        }
+
+        .spotlight-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .spotlight-heading .showcase-model-mark {
+            width: 3.5rem;
+            height: 3.5rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background-color: rgba(255, 255, 255, 0.94);
+            color: #17291f;
+            font-size: 1rem;
+        }
+
+        .spotlight-heading .showcase-model-mark img {
+            width: 74%;
+            height: 74%;
+        }
+
+        .spotlight-kicker {
+            margin: 0 0 0.15rem;
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .spotlight-heading h3 {
+            margin: 0;
+            font-size: clamp(1.35rem, 3vw, 1.8rem);
+        }
+
+        .spotlight-description {
+            margin: 1rem 0;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .spotlight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .spotlight-tags span {
+            padding: 0.3rem 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface-hover);
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .spotlight-cta {
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 0.65rem 1rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #071b10;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .comparison-section h3 {
+            margin-top: 0;
+        }
+
+        .spotlight-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .showcase-controls {
+            display: flex;
+            gap: 0.45rem;
+        }
+
+        .showcase-controls button {
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            font-size: 1.15rem;
+            cursor: pointer;
+        }
+
+        .showcase-dots {
+            display: flex;
+            gap: 0.45rem;
+        }
+
+        .showcase-dot {
+            width: 0.65rem;
+            height: 0.65rem;
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+            background: var(--border);
+            cursor: pointer;
+            transition: width 180ms ease, background-color 180ms ease;
+        }
+
+        .showcase-dot[aria-current="true"] {
+            width: 1.6rem;
+            background: var(--accent);
+        }
+
+        @media (max-width: 760px) {
+            .showcase-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-model-list {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .showcase-model-button {
+                justify-content: center;
+                flex-direction: column;
+                gap: 0.35rem;
+                padding: 0.55rem 0.35rem;
+                font-size: 0.85rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 520px) {
+            #model-showcase {
+                width: min(100% - 1rem, 1120px);
+                padding: 1rem;
+                border-radius: 16px;
+            }
+
+            .showcase-model-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .showcase-model-button,
+            .showcase-dot {
+                transition: none;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="announcement" role="status">
+        <span>ابحث عن نموذج يناسب طريقة عملك وقارن بين الفروق العملية.</span>
+        <button type="button" class="dismiss-announcement" aria-label="إغلاق الإعلان">إغلاق</button>
+    </aside>
+    <nav class="site-header-nav" aria-label="التنقل الرئيسي">
+        <a class="brand site-brand logo-container" href="index.html" aria-label="TIK CODE DZ — الصفحة الرئيسية">
+            <img src="assets/tik-code-dz-logo.png" alt="TIK CODE DZ" class="brand-logo-image">
+        </a>
+        <div class="national-flags" role="group" aria-label="الأعلام الوطنية">
+            <img src="assets/algeria-flag.png" alt="علم الجزائر">
+            <img src="assets/palestine-flag.png" alt="علم فلسطين">
+        </div>
+        <div class="language-switcher-container" id="language-switcher-container" role="group" aria-label="اختيار اللغة"></div>
+        <button class="menu-toggle" type="button" aria-label="فتح القائمة الجانبية" aria-haspopup="dialog" aria-expanded="false" aria-controls="section-drawer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <div class="nav-links" id="primary-navigation">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a>
+            <a href="sheet-tutorial.html">شرح Sheets</a>
+            <a href="programming-lab.html">مختبر البرمجة</a>
+        </div>
+    </nav>
+    <dialog class="section-drawer" id="section-drawer" aria-labelledby="drawer-title">
+        <div class="drawer-heading">
+            <h2 id="drawer-title">روابط سريعة</h2>
+            <button class="drawer-close" type="button" aria-label="إغلاق القائمة الجانبية">×</button>
+        </div>
+        <div class="drawer-links" aria-label="روابط إضافية">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#model-showcase">نماذج الذكاء الاصطناعي</a>
+            <a href="programming-lab.html">مختبر البرمجة</a>
+            <a href="sheet-tutorial.html">شرح Sheets</a>
+            <a href="ideas.html">تقديم الأفكار والمقترحات</a>
+            <a href="privacy.html">الخصوصية وإخلاء المسؤولية</a>
+            <a href="pc-development.html">التطوير عبر الحاسوب</a>
+            <a href="mobile-development.html">التطوير عبر الهاتف</a>
+        </div>
+        <div class="drawer-actions">
+            <button type="button" class="auth-open" aria-haspopup="dialog" aria-controls="auth-dialog">تسجيل الدخول / إنشاء حساب</button>
+            <button type="button" class="theme-toggle" aria-pressed="false">التبديل إلى الوضع الفاتح</button>
+        </div>
+    </dialog>
+    <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title" aria-describedby="auth-description">
+        <div class="auth-content">
+            <div class="auth-heading">
+                <div>
+                    <h2 id="auth-title">تسجيل الدخول</h2>
+                    <p id="auth-description">مرحبًا بك — اختر طريقة المتابعة.</p>
+                </div>
+                <button class="auth-close" type="button" aria-label="إغلاق نافذة تسجيل الدخول">×</button>
+            </div>
+            <div class="auth-modes" role="group" aria-label="طريقة المصادقة">
+                <button class="auth-mode" type="button" data-auth-mode="login" aria-pressed="true">تسجيل الدخول</button>
+                <button class="auth-mode" type="button" data-auth-mode="register" aria-pressed="false">إنشاء حساب</button>
+            </div>
+            <form class="auth-form">
+                <div class="auth-fields">
+                    <label class="auth-name-field" hidden="">الاسم
+                        <input name="name" type="text" autocomplete="name" maxlength="80" disabled="">
+                    </label>
+                    <label>البريد الإلكتروني
+                        <input name="email" type="email" autocomplete="email" required="">
+                    </label>
+                    <label>كلمة المرور
+                        <input name="password" type="password" autocomplete="current-password" minlength="8" required="">
+                    </label>
+                    <button class="auth-submit" type="submit">تسجيل الدخول</button>
+                </div>
+            </form>
+            <div class="auth-divider">أو تابع باستخدام</div>
+            <div class="auth-fields">
+                <button class="auth-provider" type="button" data-provider="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14c-.3-.04-1.34-.14-2.55-.14-2.53 0-4.26 1.54-4.26 4.37V9.6H7.12v3.2h2.86V21h3.52Z"></path></svg><span>تابع باستخدام Facebook</span></button>
+                <button class="auth-provider" type="button" data-provider="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.75-1.32-3.75-1.32-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.7 1.15 1.7 1.15.99 1.69 2.6 1.2 3.23.91.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.23-5.11 5.5.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"></path></svg><span>تابع باستخدام GitHub</span></button>
+            </div>
+            <p class="auth-note">واجهة تجريبية فقط: لا تُرسل معلوماتك ولا تُحفظ. تسجيل الدخول الحقيقي غير مفعّل.</p>
+            <p class="auth-status" role="status" aria-live="polite"></p>
+        </div>
+    </dialog>
+
+    <main>
+        <section class="models-showcase" id="model-showcase" dir="rtl" aria-labelledby="model-showcase-title">
+            <h2 id="model-showcase-title">اكتشف نماذج الذكاء الاصطناعي</h2>
+            <p class="showcase-intro">اختر نموذجًا للتعرّف على قدراته واستخداماته، ثم انتقل إلى صفحة الخدمة الرسمية لتجربته.</p>
+            <div class="showcase-layout">
+                <div class="showcase-model-list" role="group" aria-label="اختر نموذج الذكاء الاصطناعي">
+                    <button class="showcase-model-button" type="button" data-showcase-model="0" aria-pressed="true"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/chatgpt.svg" alt=""></span><span>ChatGPT</span></button>
+                    <button class="showcase-model-button" type="button" data-showcase-model="1" aria-pressed="false"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/gemini.svg" alt=""></span><span>Gemini</span></button>
+                    <button class="showcase-model-button" type="button" data-showcase-model="2" aria-pressed="false"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/claude.svg" alt=""></span><span>Claude</span></button>
+                    <button class="showcase-model-button" type="button" data-showcase-model="3" aria-pressed="false"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/llama.svg" alt=""></span><span>Meta Llama</span></button>
+                    <button class="showcase-model-button" type="button" data-showcase-model="4" aria-pressed="false"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/copilot.ico" alt=""></span><span>Copilot</span></button>
+                    <button class="showcase-model-button" type="button" data-showcase-model="5" aria-pressed="false"><span class="showcase-model-mark" aria-hidden="true"><img src="assets/model-logos/deepseek.svg" alt=""></span><span>DeepSeek</span></button>
+                </div>
+                <article class="spotlight-panel" aria-live="polite" aria-atomic="true">
+                    <div class="spotlight-heading">
+                        <span class="showcase-model-mark" aria-hidden="true"><img id="spotlight-mark" src="assets/model-logos/chatgpt.svg" alt=""></span>
+                        <div>
+                            <p class="spotlight-kicker">نموذج الذكاء الاصطناعي</p>
+                            <h3 id="spotlight-name">ChatGPT</h3>
+                        </div>
+                    </div>
+                    <p class="spotlight-description" id="spotlight-description">مساعد محادثة من OpenAI يساعد على الكتابة والتلخيص والشرح وتحويل الأفكار إلى خطوات عملية. راجع المخرجات وتحقق من المعلومات قبل الاعتماد عليها.</p>
+                    <div class="spotlight-tags" id="spotlight-tags" aria-label="مجالات الاستخدام"><span>الكتابة</span><span>التعلّم</span><span>تحليل الأفكار</span></div>
+                    <a class="spotlight-cta" id="spotlight-link" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">جرّب النموذج ↗</a>
+                </article>
+            </div>
+            <div class="spotlight-controls" aria-label="التنقل بين النماذج">
+                <div class="showcase-controls">
+                    <button type="button" data-showcase-step="-1" aria-label="النموذج السابق">→</button>
+                </div>
+                <div class="showcase-dots" role="group" aria-label="مؤشر النماذج">
+                    <button class="showcase-dot" type="button" data-showcase-dot="0" aria-label="النموذج 1 من 6" aria-current="true"></button>
+                    <button class="showcase-dot" type="button" data-showcase-dot="1" aria-label="النموذج 2 من 6" aria-current="false"></button>
+                    <button class="showcase-dot" type="button" data-showcase-dot="2" aria-label="النموذج 3 من 6" aria-current="false"></button>
+                    <button class="showcase-dot" type="button" data-showcase-dot="3" aria-label="النموذج 4 من 6" aria-current="false"></button>
+                    <button class="showcase-dot" type="button" data-showcase-dot="4" aria-label="النموذج 5 من 6" aria-current="false"></button>
+                    <button class="showcase-dot" type="button" data-showcase-dot="5" aria-label="النموذج 6 من 6" aria-current="false"></button>
+                </div>
+                <div class="showcase-controls">
+                    <button type="button" data-showcase-step="1" aria-label="النموذج التالي">←</button>
+                </div>
+            </div>
+            <div class="comparison-section" aria-labelledby="models-comparison-title">
+                <h3 id="models-comparison-title">قارن بين مخرجات النماذج</h3>
+                <p>اختر مهمة لمعاينة فروق أسلوب الصياغة على الطلب نفسه.</p>
+                <div class="comparison-controls">
+                    <label for="models-comparison-task">المهمة</label>
+                    <select id="models-comparison-task">
+                        <option value="summary">تلخيص المبيعات</option>
+                        <option value="sheets">اقتراح صيغة Sheets</option>
+                        <option value="planning">تنظيم جدول مهام</option>
+                    </select>
+                    <button class="compare-button" id="models-compare-models" type="button">عرض المقارنة</button>
+                </div>
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table">
+                        <thead><tr><th scope="col">الموديل</th><th scope="col">عينة المخرج</th></tr></thead>
+                        <tbody id="models-comparison-output" aria-live="polite">
+                            <tr><th scope="row">ChatGPT</th><td>اختر مهمة لعرض عينة توضيحية.</td></tr>
+                            <tr><th scope="row">Gemini</th><td>اختر مهمة لعرض عينة توضيحية.</td></tr>
+                            <tr><th scope="row">Claude</th><td>اختر مهمة لعرض عينة توضيحية.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="comparison-note">هذه أمثلة تعليمية ثابتة تُعرض محليًا، وليست ناتجة عن تشغيل الموديلات أو اتصال بخدماتها. تختلف النتائج الفعلية بحسب الطلب والإصدار.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 مشروع شعيب. جميع الحقوق محفوظة. | شارك هذه الصفحة</p>
+        <div class="share-links" aria-label="مشاركة الصفحة">
+            <a class="share-x" href="https://twitter.com/intent/tweet?url=file%3A%2F%2F%2FC%3A%2FUsers%2Fmoah%2F.cline%2Fdata%2Fworkspaces%2Fchat%2Fshuaib_project%2Fai-models.html%3Fverify%3Dlogos&amp;text=%D9%86%D9%85%D8%A7%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20%7C%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%B4%D8%B9%D9%8A%D8%A8" target="_blank" rel="noopener noreferrer">Share on X</a>
+            <a class="share-whatsapp" href="https://api.whatsapp.com/send?text=%D9%86%D9%85%D8%A7%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20%7C%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%B4%D8%B9%D9%8A%D8%A8%20file%3A%2F%2F%2FC%3A%2FUsers%2Fmoah%2F.cline%2Fdata%2Fworkspaces%2Fchat%2Fshuaib_project%2Fai-models.html%3Fverify%3Dlogos" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=file%3A%2F%2F%2FC%3A%2FUsers%2Fmoah%2F.cline%2Fdata%2Fworkspaces%2Fchat%2Fshuaib_project%2Fai-models.html%3Fverify%3Dlogos&amp;title=%D9%86%D9%85%D8%A7%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20%7C%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%B4%D8%B9%D9%8A%D8%A8&amp;summary=%D9%86%D9%85%D8%A7%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20%7C%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%B4%D8%B9%D9%8A%D8%A8" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+        <button class="privacy-link" type="button" data-open-privacy="">سياسة الخصوصية وإخلاء المسؤولية</button>
+        <div class="footer-page-links" role="navigation" aria-label="صفحات المشروع">
+            <a href="ideas.html">الأفكار والمقترحات</a>
+            <a href="privacy.html">الخصوصية وإخلاء المسؤولية</a>
+            <a href="pc-development.html">التطوير عبر الحاسوب</a>
+            <a href="mobile-development.html">التطوير عبر الهاتف</a>
+        </div>
+    </footer>
+    <dialog class="privacy-dialog" id="privacy-dialog" aria-labelledby="privacy-title">
+        <div class="privacy-dialog-content">
+            <div class="privacy-dialog-header">
+                <h2 id="privacy-title">سياسة الخصوصية وإخلاء المسؤولية</h2>
+                <button class="privacy-close" type="button" aria-label="إغلاق سياسة الخصوصية">×</button>
+            </div>
+            <h3>إخلاء المسؤولية</h3>
+            <p>إخلاء مسؤولية: هذا الموقع هو مشروع شخصي بحت تم تطويره بواسطة (شعيب) لأغراض تعليمية واستعراضية فقط، وهو غير تابع، ولا يمثل، وليس مدعوماً من أي جهة أو شركة رسمية (مثل Google أو OpenAI أو غيرها).</p>
+            <h3>الخصوصية والبيانات</h3>
+            <p>مدخلات مولّدات البرومبتات تُعالج داخل متصفحك ولا تُرسل إلى خوادم هذا الموقع ولا تُحفظ فيه. تُحفظ محليًا تفضيلات المظهر والموديل والمهمة وموافقة السياسة فقط. تختلف هذه القاعدة عند تشغيل عينة Apps Script يدويًا: يرسل المثال نطاق A1:D20 إلى OpenAI API؛ لا تستخدمه مع بيانات حساسة وراجع شروط مزوّد الخدمة.</p>
+            <p>تحميل خط Tajawal من Google Fonts يتطلب اتصالًا بخوادم Google، وقد يعالج مزوّد الخط بيانات الاتصال وفق سياسته. لا ينفذ الموقع تسجيل دخول حقيقيًا ولا يرسل بيانات نموذج تسجيل الدخول.</p>
+        </div>
+    </dialog>
+    <aside class="privacy-banner" id="privacy-banner" role="region" aria-label="إشعار الخصوصية">
+        <p>نحن نحترم خصوصيتك. استخدامك للموقع يعني موافقتك على سياسة الخصوصية والمفهوم الشخصي للمشروع.</p>
+        <button type="button" id="privacy-accept">أوافق / Accept</button>
+        <span class="privacy-status" role="status" aria-live="polite"></span>
+    </aside>
+    <button class="back-to-top" type="button" aria-label="العودة للأعلى" hidden="">العودة للأعلى</button>
+    <script>
+        const root = document.documentElement;
+        const themeToggle = document.querySelector('.theme-toggle');
+        const authDialog = document.querySelector('#auth-dialog');
+        const authForm = document.querySelector('.auth-form');
+        const authNameField = document.querySelector('.auth-name-field');
+        const authStatus = document.querySelector('.auth-status');
+        const authTitle = document.querySelector('#auth-title');
+        const authSubmit = document.querySelector('.auth-submit');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sectionDrawer = document.querySelector('#section-drawer');
+        const privacyConsentKey = 'shuaib-privacy-consent-v1';
+        const privacyBanner = document.querySelector('#privacy-banner');
+        const privacyDialog = document.querySelector('#privacy-dialog');
+
+        document.querySelector('[data-open-privacy]').addEventListener('click', () => privacyDialog.showModal());
+        document.querySelector('.privacy-close').addEventListener('click', () => privacyDialog.close());
+        privacyDialog.addEventListener('click', (event) => {
+            if (event.target === privacyDialog) privacyDialog.close();
+        });
+        document.querySelector('#privacy-accept').addEventListener('click', () => {
+            try {
+                localStorage.setItem(privacyConsentKey, 'accepted');
+                privacyBanner.hidden = true;
+            } catch (error) {
+                console.error('Privacy consent could not be saved.', error);
+                document.querySelector('.privacy-status').textContent = 'Could not save your consent in this browser. Please try again.';
+            }
+        });
+        try {
+            privacyBanner.hidden = localStorage.getItem(privacyConsentKey) === 'accepted';
+        } catch (error) {
+            console.warn('Privacy consent could not be read; the notice remains visible.', error);
+        }
+
+        function setNavigationOpen(isOpen) {
+            if (isOpen && !sectionDrawer.open) sectionDrawer.showModal();
+            if (!isOpen && sectionDrawer.open) sectionDrawer.close();
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'إغلاق القائمة الجانبية' : 'فتح القائمة الجانبية');
+        }
+
+        menuToggle.addEventListener('click', () => setNavigationOpen(!sectionDrawer.open));
+        document.querySelector('.drawer-close').addEventListener('click', () => setNavigationOpen(false));
+        sectionDrawer.addEventListener('close', () => menuToggle.setAttribute('aria-expanded', 'false'));
+        sectionDrawer.addEventListener('click', (event) => {
+            if (event.target === sectionDrawer || event.target.closest('a')) setNavigationOpen(false);
+        });
+
+        document.querySelector('.auth-open').addEventListener('click', () => {
+            setNavigationOpen(false);
+            authDialog.showModal();
+        });
+        document.querySelector('.auth-close').addEventListener('click', () => authDialog.close());
+        document.querySelectorAll('.auth-mode').forEach((button) => {
+            button.addEventListener('click', () => {
+                const registering = button.dataset.authMode === 'register';
+                document.querySelectorAll('.auth-mode').forEach((modeButton) => {
+                    modeButton.setAttribute('aria-pressed', String(modeButton === button));
+                });
+                authNameField.hidden = !registering;
+                authNameField.querySelector('input').disabled = !registering;
+                authNameField.querySelector('input').required = registering;
+                authForm.elements.password.autocomplete = registering ? 'new-password' : 'current-password';
+                authTitle.textContent = registering ? 'إنشاء حساب' : 'Sign in';
+                authSubmit.textContent = registering ? 'Create demo account' : 'Sign in';
+                authStatus.textContent = '';
+            });
+        });
+        authForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            authStatus.textContent = 'Demo interface only; no account was created and no information was sent.';
+            authForm.elements.password.value = '';
+        });
+        document.querySelectorAll('.auth-provider').forEach((button) => {
+            button.addEventListener('click', () => {
+                authStatus.textContent = `${button.dataset.provider} sign-in is not enabled in this demo interface.`;
+            });
+        });
+        authDialog.addEventListener('close', () => {
+            authForm.reset();
+            document.querySelector('[data-auth-mode="login"]').click();
+            authStatus.textContent = '';
+        });
+
+        try {
+            const savedTheme = localStorage.getItem('shuaib-project-theme');
+            if (savedTheme === 'light' || savedTheme === 'dark') root.dataset.theme = savedTheme;
+        } catch (error) {
+            console.warn('Theme preference storage is unavailable.', error);
+        }
+        function updateThemeButton() {
+            const lightMode = root.dataset.theme === 'light';
+            themeToggle.textContent = lightMode ? 'التبديل إلى الوضع الداكن' : 'التبديل إلى الوضع الفاتح';
+            themeToggle.setAttribute('aria-pressed', String(lightMode));
+        }
+        updateThemeButton();
+        themeToggle.addEventListener('click', () => {
+            root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+            try {
+                localStorage.setItem('shuaib-project-theme', root.dataset.theme);
+            } catch (error) {
+                console.warn('Theme preference could not be saved.', error);
+            }
+            updateThemeButton();
+        });
+
+        document.querySelector('.dismiss-announcement').addEventListener('click', () => {
+            document.querySelector('.announcement').hidden = true;
+        });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.hidden = window.scrollY < 320;
+        }, { passive: true });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        const shareUrl = encodeURIComponent(location.href);
+        const shareTitle = encodeURIComponent(document.title);
+        document.querySelector('.share-x').href = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`;
+        document.querySelector('.share-whatsapp').href = `https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`;
+        document.querySelector('.share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}&title=${shareTitle}&summary=${shareTitle}`;
+
+        const showcaseModels = [
+            {
+                name: 'ChatGPT',
+                logo: 'assets/model-logos/chatgpt.svg',
+                description: 'مساعد محادثة من OpenAI يساعد على الكتابة والتلخيص والشرح وتحويل الأفكار إلى خطوات عملية. راجع المخرجات وتحقق من المعلومات قبل الاعتماد عليها.',
+                tags: ['الكتابة', 'التعلّم', 'تحليل الأفكار'],
+                url: 'https://chatgpt.com/'
+            },
+            {
+                name: 'Google Gemini',
+                logo: 'assets/model-logos/gemini.svg',
+                description: 'مساعد Google للذكاء الاصطناعي، يساعد في توليد الأفكار وفهم المحتوى والعمل ضمن خدمات Google المدعومة، بحسب الحساب والخطة والمنطقة.',
+                tags: ['Google', 'الإنتاجية', 'الوسائط المتعددة'],
+                url: 'https://gemini.google.com/app'
+            },
+            {
+                name: 'Anthropic Claude',
+                logo: 'assets/model-logos/claude.svg',
+                description: 'مساعد من Anthropic مناسب لتحليل النصوص الطويلة، تنظيم المعلومات، والشرح والكتابة. قسّم المهام واطلب منه توضيح افتراضاته.',
+                tags: ['تحليل النصوص', 'الكتابة', 'البرمجة'],
+                url: 'https://claude.ai/'
+            },
+            {
+                name: 'Meta Llama',
+                logo: 'assets/model-logos/llama.svg',
+                description: 'عائلة نماذج متقدمة من Meta، تتميز بتنوع خياراتها وإمكانية التشغيل المحلي والتخصيص، وفق ترخيص كل إصدار ومتطلبات العتاد.',
+                tags: ['مفتوح الأوزان', 'تشغيل محلي', 'تخصيص'],
+                url: 'https://www.meta.ai/'
+            },
+            {
+                name: 'Microsoft Copilot',
+                logo: 'assets/model-logos/copilot.ico',
+                description: 'مساعد Microsoft للإنتاجية والعمل، يساعد على الكتابة وتلخيص المحتوى ودعم البرمجة، مع تكاملات تختلف بحسب المنتج والخطة.',
+                tags: ['الإنتاجية', 'Microsoft', 'البرمجة'],
+                url: 'https://copilot.microsoft.com/'
+            },
+            {
+                name: 'DeepSeek',
+                logo: 'assets/model-logos/deepseek.svg',
+                description: 'نماذج تركز على الاستدلال والبرمجة والتحليل، ويمكنها المساعدة في التعامل مع المسائل المعقدة؛ تحقّق من الإجابات والشفرة عمليًا.',
+                tags: ['الاستدلال', 'البرمجة', 'التحليل'],
+                url: 'https://chat.deepseek.com/'
+            }
+        ];
+        const showcaseButtons = [...document.querySelectorAll('[data-showcase-model]')];
+        const showcaseDots = [...document.querySelectorAll('[data-showcase-dot]')];
+        let activeShowcaseModel = 0;
+        const updateShowcase = (index) => {
+            activeShowcaseModel = (index + showcaseModels.length) % showcaseModels.length;
+            const model = showcaseModels[activeShowcaseModel];
+            document.querySelector('#spotlight-mark').src = model.logo;
+            document.querySelector('#spotlight-name').textContent = model.name;
+            document.querySelector('#spotlight-description').textContent = model.description;
+            document.querySelector('#spotlight-link').href = model.url;
+            const tagsContainer = document.querySelector('#spotlight-tags');
+            tagsContainer.replaceChildren(...model.tags.map((tag) => {
+                const tagElement = document.createElement('span');
+                tagElement.textContent = tag;
+                return tagElement;
+            }));
+            showcaseButtons.forEach((button, buttonIndex) => {
+                button.setAttribute('aria-pressed', String(buttonIndex === activeShowcaseModel));
+            });
+            showcaseDots.forEach((dot, dotIndex) => {
+                dot.setAttribute('aria-current', String(dotIndex === activeShowcaseModel));
+            });
+        };
+        showcaseButtons.forEach((button, index) => {
+            button.addEventListener('pointerenter', () => updateShowcase(index));
+            button.addEventListener('focus', () => updateShowcase(index));
+            button.addEventListener('click', () => updateShowcase(index));
+        });
+        showcaseDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => updateShowcase(index));
+        });
+        document.querySelectorAll('[data-showcase-step]').forEach((button) => {
+            button.addEventListener('click', () => {
+                updateShowcase(activeShowcaseModel + Number(button.dataset.showcaseStep));
+            });
+        });
+        const comparisonExamples = {
+            summary: [
+                'ملخص: ارتفعت المبيعات في الفترة الأخيرة. راجع الجدول المرفق لتحديد مقدار التغيّر.',
+                'الاتجاه: مقارنة الفترات تساعد على تحديد النمو؛ أضف القيم الفعلية لحساب النسبة.',
+                'الخلاصة: اعرض إجمالي كل فترة ثم قارن الاتجاه. لا يمكن تحديد نسبة دقيقة دون بيانات.'
+            ],
+            sheets: [
+                '=SUMIFS(C2:C, A2:A, E2) — يجمع C عند تطابق A مع E2.',
+                'للتجميع حسب المنتج استخدم SUMIF، أو QUERY عند الحاجة إلى تلخيص عدة أعمدة.',
+                'صيغة مقترحة: =SUMIF(A2:A, E2, C2:C). تحقق من مواقع الأعمدة والنطاقات.'
+            ],
+            planning: [
+                'الأعمدة المقترحة: المهمة، المسؤول، تاريخ البدء، الموعد النهائي، الحالة.',
+                'قسّم المهام حسب الأسبوع، وأضف المسؤول والحالة لتسهيل المتابعة في Sheets.',
+                'ابدأ بجدول صغير: المهمة | المسؤول | الموعد | الحالة. أضف الأولوية عند الحاجة.'
+            ]
+        };
+        document.querySelector('#models-compare-models').addEventListener('click', () => {
+            const samples = comparisonExamples[document.querySelector('#models-comparison-task').value];
+            const output = document.querySelector('#models-comparison-output');
+            output.replaceChildren();
+            ['ChatGPT', 'Gemini', 'Claude'].forEach((model, index) => {
+                const row = document.createElement('tr');
+                const heading = document.createElement('th');
+                const cell = document.createElement('td');
+                heading.scope = 'row';
+                heading.textContent = model;
+                cell.textContent = samples[index];
+                row.append(heading, cell);
+                output.append(row);
+            });
+        });
+    </script>
+    <script src="cmd-simulator.js"></script>
+    <script src="site-navigation.js"></script>
+    <script src="mobile-header-scroll.js"></script>
+</body>
+</html>
